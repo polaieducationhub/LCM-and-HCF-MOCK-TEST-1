@@ -1,0 +1,2434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCM & HCF Special Mock Test - POLAI EDUCATION HUB</title>
+  <style>
+    :root {
+      --primary-color: #1e3a8a;
+      --primary-light: #3b82f6;
+      --primary-dark: #172554;
+      --accent-color: #f59e0b;
+      --success-color: #10b981;
+      --danger-color: #ef4444;
+      --neutral-light: #f8fafc;
+      --neutral-dark: #0f172a;
+      --text-color: #334155;
+      --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --card-shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--text-color);
+      background-color: #f1f5f9;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Math rendering utility classes */
+    i {
+      font-family: 'Georgia', serif;
+      font-style: italic;
+    }
+    .math {
+      font-family: 'Georgia', serif;
+      font-size: 1.1em;
+      white-space: nowrap;
+    }
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      line-height: 1;
+      padding: 0 4px;
+    }
+    .fraction .numerator {
+      border-bottom: 1.5px solid currentColor;
+      padding-bottom: 2px;
+      margin-bottom: 2px;
+      text-align: center;
+      width: 100%;
+    }
+    .fraction .denominator {
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Header styling */
+    header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 1.4rem;
+      font-weight: 850;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffd700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .brand-subtitle {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .lang-tabs {
+      display: flex;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      padding: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .lang-tab {
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      background: transparent;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lang-tab.active {
+      background-color: white;
+      color: var(--primary-color);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .header-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .header-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    /* Page layouts */
+    .page {
+      display: none;
+      min-height: calc(100vh - 66px);
+      padding: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .page.active {
+      display: block;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Start Page Styling */
+    #start-page {
+      max-width: 720px;
+      margin: 40px auto;
+      padding: 40px 24px;
+    }
+
+    .start-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      padding: 32px;
+      text-align: center;
+      border-top: 6px solid var(--primary-color);
+    }
+
+    .start-logo {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .start-channel {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .start-topic {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-color);
+      background: #eff6ff;
+      padding: 10px 20px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 24px;
+      border: 1px solid #dbeafe;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .info-item {
+      background: var(--neutral-light);
+      padding: 16px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid #f1f5f9;
+      transition: transform 0.2s ease;
+    }
+
+    .info-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .info-icon {
+      font-size: 1.6rem;
+    }
+
+    .info-detail {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-label {
+      font-size: 0.8rem;
+      color: #64748b;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .info-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--neutral-dark);
+    }
+
+    .lang-selection-box {
+      margin-bottom: 28px;
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      text-align: left;
+    }
+
+    .lang-selection-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lang-options {
+      display: flex;
+      gap: 20px;
+    }
+
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      user-select: none;
+    }
+
+    .lang-option input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary-color);
+    }
+
+    .start-btn {
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .start-btn:hover {
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* Test Page Styling */
+    .test-container {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Main Area: Question Panel */
+    .question-panel {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      padding: 24px;
+      border: 1px solid #e2e8f0;
+      position: relative;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+
+    .q-num {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .marks-info {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .mark-positive {
+      color: var(--success-color);
+      margin-right: 8px;
+    }
+
+    .mark-negative {
+      color: var(--danger-color);
+    }
+
+    .question-body {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--neutral-dark);
+      min-height: 80px;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .option-card {
+      background: var(--neutral-light);
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-light);
+      background: #eff6ff;
+    }
+
+    .option-card.selected {
+      border-color: var(--primary-color);
+      background: #dbeafe;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .option-bullet {
+      background: white;
+      border: 2px solid #cbd5e1;
+      color: #64748b;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .option-card:hover .option-bullet {
+      border-color: var(--primary-light);
+      color: var(--primary-light);
+    }
+
+    .option-card.selected .option-bullet {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+    }
+
+    .option-content {
+      flex-grow: 1;
+    }
+
+    /* Action Buttons in panel */
+    .panel-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-group-left {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-group-right {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-outline {
+      background: white;
+      border: 1.5px solid #cbd5e1;
+      color: var(--text-color);
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .btn-review {
+      background-color: #fffbeb;
+      border: 1.5px solid #f59e0b;
+      color: #d97706;
+    }
+
+    .btn-review:hover {
+      background-color: #fef3c7;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-light);
+    }
+
+    /* Sidebar: Timer & Palette */
+    .sidebar-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .timer-card {
+      text-align: center;
+      border-left: 5px solid var(--primary-color);
+    }
+
+    .timer-title {
+      font-size: 0.85rem;
+      color: #64748b;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .timer-display {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      font-family: monospace;
+    }
+
+    .timer-display.warn {
+      color: var(--danger-color);
+      animation: blink 1s infinite alternate;
+    }
+
+    @keyframes blink {
+      from { opacity: 1; }
+      to { opacity: 0.5; }
+    }
+
+    /* Progress bar */
+    .progress-container {
+      margin-top: 10px;
+      background: #e2e8f0;
+      border-radius: 6px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, var(--primary-light), var(--success-color));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Palette grid */
+    .palette-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--neutral-dark);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .palette-btn {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .palette-btn:hover {
+      border-color: var(--primary-light);
+      background: #eff6ff;
+    }
+
+    .palette-btn.current {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.25);
+    }
+
+    .palette-btn.unattempted {
+      background-color: #f1f5f9;
+      border-color: #cbd5e1;
+      color: #64748b;
+    }
+
+    .palette-btn.attempted {
+      background-color: var(--success-color);
+      border-color: var(--success-color);
+      color: white;
+    }
+
+    .palette-btn.reviewed {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+      color: white;
+    }
+
+    /* Legend */
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-box {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .legend-box.unattempted { background-color: #f1f5f9; border: 1px solid #cbd5e1; }
+    .legend-box.attempted { background-color: var(--success-color); }
+    .legend-box.reviewed { background-color: var(--accent-color); }
+
+    .submit-btn-card {
+      padding: 0;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .btn-submit-test {
+      width: 100%;
+      background: linear-gradient(135deg, var(--danger-color) 0%, #b91c1c 100%);
+      color: white;
+      padding: 14px;
+      font-size: 1.05rem;
+      font-weight: 750;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit-test:hover {
+      box-shadow: 0 6px 15px rgba(239, 68, 68, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Result Page Styling */
+    #result-page {
+      max-width: 800px;
+      margin: 30px auto;
+    }
+
+    .result-card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: var(--card-shadow);
+      padding: 40px 30px;
+      text-align: center;
+      border-top: 8px solid var(--success-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-congrats {
+      font-size: 2.2rem;
+      font-weight: 850;
+      color: var(--success-color);
+      margin-bottom: 24px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    /* Circular progress meter */
+    .score-circle-container {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 28px;
+    }
+
+    .score-circle svg {
+      transform: rotate(-90deg);
+    }
+
+    .score-circle circle {
+      fill: none;
+      stroke-width: 12;
+      stroke-linecap: round;
+    }
+
+    .score-circle circle.bg {
+      stroke: #f1f5f9;
+    }
+
+    .score-circle circle.progress {
+      stroke: var(--primary-light);
+      transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .score-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .score-num {
+      font-size: 2.5rem;
+      font-weight: 850;
+      color: var(--primary-color);
+      line-height: 1.1;
+    }
+
+    .score-label {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .rank-badge {
+      font-size: 1.25rem;
+      font-weight: 750;
+      color: var(--primary-dark);
+      background: #eff6ff;
+      border: 1.5px solid #dbeafe;
+      padding: 10px 24px;
+      border-radius: 30px;
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 35px;
+    }
+
+    .stat-card {
+      background: var(--neutral-light);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-val {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-card.correct .stat-val { color: var(--success-color); }
+    .stat-card.wrong .stat-val { color: var(--danger-color); }
+    .stat-card.unattempted .stat-val { color: #64748b; }
+    .stat-card.time .stat-val { color: var(--primary-light); }
+
+    .result-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .result-actions .btn {
+      padding: 14px 28px;
+      font-size: 1.05rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    /* Review Page Styling */
+    #review-page {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #cbd5e1;
+    }
+
+    .review-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 35px;
+    }
+
+    .review-item-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      padding: 24px;
+      border: 2px solid #e2e8f0;
+      border-left: 6px solid #94a3b8;
+    }
+
+    .review-item-card.correct { border-left-color: var(--success-color); }
+    .review-item-card.wrong { border-left-color: var(--danger-color); }
+    .review-item-card.unattempted { border-left-color: #94a3b8; }
+
+    .review-item-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .review-item-card.correct .review-item-status {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+
+    .review-item-card.wrong .review-item-status {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+
+    .review-item-card.unattempted .review-item-status {
+      background-color: #f1f5f9;
+      color: #475569;
+    }
+
+    .review-item-question {
+      font-size: 1.1rem;
+      font-weight: 650;
+      color: var(--neutral-dark);
+      margin-bottom: 20px;
+    }
+
+    .review-item-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .review-opt-box {
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1.5px solid #e2e8f0;
+      background-color: var(--neutral-light);
+      font-size: 0.95rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .review-opt-box.user-selected {
+      border-color: var(--danger-color);
+      background-color: #fef2f2;
+      color: #991b1b;
+    }
+
+    .review-opt-box.correct-choice {
+      border-color: var(--success-color);
+      background-color: #ecfdf5;
+      color: #065f46;
+      font-weight: 600;
+    }
+
+    .review-opt-box.user-selected.correct-choice {
+      border-color: var(--success-color);
+      background-color: #ecfdf5;
+      color: #065f46;
+    }
+
+    .review-opt-bullet {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: white;
+      border: 1.5px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .review-opt-box.user-selected .review-opt-bullet {
+      background-color: var(--danger-color);
+      border-color: var(--danger-color);
+      color: white;
+    }
+
+    .review-opt-box.correct-choice .review-opt-bullet {
+      background-color: var(--success-color);
+      border-color: var(--success-color);
+      color: white;
+    }
+
+    .explanation-box {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px;
+      font-size: 0.95rem;
+      color: #475569;
+      border-left: 4px solid var(--primary-light);
+    }
+
+    .explanation-title {
+      font-weight: 750;
+      font-size: 0.95rem;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: white;
+      border-top: 1px solid #cbd5e1;
+      padding: 24px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .footer-text {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    .yt-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #ff0000;
+      color: white;
+      text-decoration: none;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(255, 0, 0, 0.25);
+    }
+
+    .yt-btn:hover {
+      background-color: #cc0000;
+      box-shadow: 0 6px 15px rgba(255, 0, 0, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .yt-icon {
+      font-size: 1.2rem;
+    }
+
+    /* Fullscreen Canvas overlay for animations */
+    #animation-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .test-container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar-panel {
+        order: -1;
+        flex-direction: row;
+      }
+      .sidebar-card {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar-panel {
+        flex-direction: column;
+      }
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      .review-item-options {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .result-actions {
+        flex-direction: column;
+      }
+      .panel-footer {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn {
+        justify-content: center;
+      }
+      .brand-title {
+        font-size: 1.15rem;
+      }
+      .lang-tabs {
+        display: none; /* Hide top nav tabs on very small screens, rely on start page or sidebar */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen canvas for Confetti & Balloons -->
+  <canvas id="animation-canvas"></canvas>
+
+  <header>
+    <div class="brand">
+      <div class="brand-title">🏆 POLAI EDUCATION HUB</div>
+      <div class="brand-subtitle">LCM & HCF Special Mock Test</div>
+    </div>
+    <div class="header-controls">
+      <div class="lang-tabs" id="header-lang-tabs" style="display: none;">
+        <button class="lang-tab active" onclick="setLanguage('en')">English</button>
+        <button class="lang-tab" onclick="setLanguage('hi')">हिन्दी</button>
+        <button class="lang-tab" onclick="setLanguage('or')">ଓଡ଼ିଆ</button>
+      </div>
+      <button class="header-btn" id="music-btn" onclick="toggleMusic()" title="Toggle Background Music">🔊</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. START PAGE -->
+    <div id="start-page" class="page active">
+      <div class="start-card">
+        <div class="start-logo">🏆</div>
+        <div class="start-channel">POLAI EDUCATION HUB</div>
+        <div class="start-topic">LCM & HCF Special Mock Test</div>
+        
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-icon">📝</span>
+            <div class="info-detail">
+              <span class="info-label">Total Questions</span>
+              <span class="info-value">25</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">🎯</span>
+            <div class="info-detail">
+              <span class="info-label">Total Marks</span>
+              <span class="info-value">50</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">✅</span>
+            <div class="info-detail">
+              <span class="info-label">Correct Marking</span>
+              <span class="info-value">+2.0 Marks</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">❌</span>
+            <div class="info-detail">
+              <span class="info-label">Negative Marking</span>
+              <span class="info-value">-0.5 Marks</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">⏰</span>
+            <div class="info-detail">
+              <span class="info-label">Time Limit</span>
+              <span class="info-value">20 Minutes</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">🌐</span>
+            <div class="info-detail">
+              <span class="info-label">Offline Status</span>
+              <span class="info-value">100% Offline Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lang-selection-box">
+          <div class="lang-selection-title">🌐 Choose Your Language / भाषा चुनें / ଭାଷା ଚୟନ କରନ୍ତୁ:</div>
+          <div class="lang-options">
+            <label class="lang-option">
+              <input type="radio" name="start-lang" value="en" checked onclick="setLanguage('en')"> English
+            </label>
+            <label class="lang-option">
+              <input type="radio" name="start-lang" value="hi" onclick="setLanguage('hi')"> हिन्दी (Hindi)
+            </label>
+            <label class="lang-option">
+              <input type="radio" name="start-lang" value="or" onclick="setLanguage('or')"> ଓଡ଼ିଆ (Odia)
+            </label>
+          </div>
+        </div>
+
+        <button class="start-btn" onclick="startTest()">
+          🚀 START TEST
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. TEST PAGE -->
+    <div id="test-page" class="page">
+      <div class="test-container">
+        <!-- Question Pane -->
+        <div class="question-panel">
+          <div class="question-header">
+            <span class="q-num" id="question-num-title">Question 1 of 25</span>
+            <div class="marks-info">
+              <span class="mark-positive">+2.0</span>
+              <span class="mark-negative">-0.5</span>
+            </div>
+          </div>
+
+          <div class="question-body" id="question-text">
+            <!-- Question content injected here -->
+          </div>
+
+          <div class="options-list" id="options-container">
+            <!-- Options injected here -->
+          </div>
+
+          <div class="panel-footer">
+            <div class="btn-group-left">
+              <button class="btn btn-outline" onclick="prevQuestion()">Previous</button>
+              <button class="btn btn-outline" onclick="clearResponse()">Clear Response</button>
+            </div>
+            <div class="btn-group-right">
+              <button class="btn btn-review" onclick="markForReview()">Mark for Review</button>
+              <button class="btn btn-primary" onclick="nextQuestion()">Save & Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <div class="sidebar-panel">
+          <!-- Timer and Progress -->
+          <div class="sidebar-card timer-card">
+            <div class="timer-title">Time Left</div>
+            <div class="timer-display" id="timer-text">20:00</div>
+            <div class="progress-container">
+              <div class="progress-bar" id="progress-bar-el"></div>
+            </div>
+          </div>
+
+          <!-- Question Palette -->
+          <div class="sidebar-card">
+            <div class="palette-title">Question Palette</div>
+            <div class="palette-grid" id="palette-grid-el">
+              <!-- 25 palette buttons generated here -->
+            </div>
+            <div class="legend-grid">
+              <div class="legend-item">
+                <div class="legend-box unattempted"></div>
+                <span>Unattempted</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-box attempted"></div>
+                <span>Attempted</span>
+              </div>
+              <div class="legend-item" style="grid-column: span 2;">
+                <div class="legend-box reviewed"></div>
+                <span>Marked for Review</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="sidebar-card submit-btn-card">
+            <button class="btn-submit-test" onclick="confirmSubmit()">
+              ✔ Submit Test
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. RESULT PAGE -->
+    <div id="result-page" class="page">
+      <div class="result-card">
+        <div class="result-congrats">🎉 Congratulations!</div>
+        
+        <div class="score-circle-container">
+          <svg class="score-circle" width="180" height="180" viewBox="0 0 180 180">
+            <defs>
+              <linearGradient id="score-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#10b981" />
+              </linearGradient>
+            </defs>
+            <circle class="bg" cx="90" cy="90" r="80"></circle>
+            <circle class="progress" id="result-circle-progress" cx="90" cy="90" r="80" style="stroke-dasharray: 502; stroke-dashoffset: 502;"></circle>
+          </svg>
+          <div class="score-value">
+            <span class="score-num" id="result-score">0.0</span>
+            <span class="score-label">out of 50</span>
+          </div>
+        </div>
+
+        <div class="rank-badge" id="rank-badge-text">Excellent 🏆</div>
+
+        <div class="stats-grid">
+          <div class="stat-card correct">
+            <span class="stat-val" id="stat-correct">0</span>
+            <span class="stat-lbl">Correct</span>
+          </div>
+          <div class="stat-card wrong">
+            <span class="stat-val" id="stat-wrong">0</span>
+            <span class="stat-lbl">Wrong</span>
+          </div>
+          <div class="stat-card unattempted">
+            <span class="stat-val" id="stat-unattempted">0</span>
+            <span class="stat-lbl">Unattempted</span>
+          </div>
+          <div class="stat-card time">
+            <span class="stat-val" id="stat-time">00:00</span>
+            <span class="stat-lbl">Time Taken</span>
+          </div>
+        </div>
+
+        <div class="result-actions">
+          <button class="btn btn-primary" onclick="showReviewPage()">🔍 Review Answers</button>
+          <button class="btn btn-outline" onclick="retakeTest()">🔁 Retake Test</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. REVIEW PAGE -->
+    <div id="review-page" class="page">
+      <div class="review-header">
+        <h1 class="review-title">Detailed Answers Review</h1>
+        <button class="btn btn-outline" onclick="goBackToResult()">Back to Scorecard</button>
+      </div>
+      <div class="review-list" id="review-list-el">
+        <!-- Review items injected here -->
+      </div>
+      <div style="text-align: center;">
+        <button class="btn btn-primary" onclick="goBackToResult()" style="display: inline-block;">Back to Scorecard</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-text">❤️ Thank You For Taking The Test</div>
+    <div class="footer-text" style="font-size: 0.9rem; color: #64748b;">Subscribe to our channel for more classes</div>
+    <a href="https://www.youtube.com/@POLAIEDUCATIONHUB" target="_blank" class="yt-btn">
+      <span class="yt-icon">▶</span> POLAI EDUCATION HUB
+    </a>
+  </footer>
+
+  <script>
+    // --- 25 QUESTIONS DATASET ---
+    const questionsData = [
+      {
+        id: 1,
+        en: "The product of the two numbers is 1500 and their HCF is 10. The number of such possible pairs is/are :",
+        hi: "दो संख्याओं का गुणनफल 1500 है और उनका म.स.प. (HCF) 10 है। ऐसे संभावित युग्मों की संख्या .......... है।",
+        or: "ଦୁଇଟି ସଂଖ୍ୟାର ଗୁଣଫଳ 1500 ଏବଂ ସେମାନଙ୍କର ଗ.ସା.ଗୁ. (HCF) 10 ଅଟେ । ଏପରି ସମ୍ଭାବ୍ୟ ଯୋଡ଼ି ସଂଖ୍ୟା କେତେ?",
+        options: {
+          en: ["4", "3", "1", "2"],
+          hi: ["4", "3", "1", "2"],
+          or: ["4", "3", "1", "2"]
+        },
+        correctIndex: 3, // Option 'd'
+        exp_en: "Let the two numbers be 10<i>x</i> and 10<i>y</i>, where <i>x</i> and <i>y</i> are co-prime integers.<br>Product of numbers = (10<i>x</i>)(10<i>y</i>) = 100<i>xy</i> = 1500<br>⇒ <i>xy</i> = 15.<br>The co-prime pairs (<i>x</i>, <i>y</i>) whose product is 15 are (1, 15) and (3, 5).<br>Therefore, there are exactly <b>2</b> such possible pairs.",
+        exp_hi: "मान लीजिए दो संख्याएँ 10<i>x</i> और 10<i>y</i> हैं, जहाँ <i>x</i> और <i>y</i> सह-अभाज्य पूर्णांक हैं।<br>संख्याओं का गुणनफल = (10<i>x</i>)(10<i>y</i>) = 100<i>xy</i> = 1500<br>⇒ <i>xy</i> = 15।<br>सह-अभाज्य युग्म (<i>x</i>, <i>y</i>) जिनका गुणनफल 15 है, वे (1, 15) और (3, 5) हैं।<br>अतः, ऐसे युग्मों की संख्या ठीक <b>2</b> है।",
+        exp_or: "ମନେକରନ୍ତୁ ସଂଖ୍ୟା ଦୁଇଟି 10<i>x</i> ଏବଂ 10<i>y</i>, ଯେଉଁଠାରେ <i>x</i> ଏବଂ <i>y</i> ପରସ୍ପର ମୌଳିକ (co-prime) ସଂଖ୍ୟା ଅଟନ୍ତି ।<br>ସଂଖ୍ୟାଦ୍ଵୟର ଗୁଣଫଳ = (10<i>x</i>)(10<i>y</i>) = 100<i>xy</i> = 1500<br>⇒ <i>xy</i> = 15 ।<br>ଯେଉଁ ଗୁଣଫଳ 15 ହୁଏ, ସେହିପରି ପରସ୍ପର ମୌଳିକ ଯୋଡ଼ିଗୁଡ଼ିକ ହେଲା (1, 15) ଏବଂ (3, 5) ।<br>ତେଣୁ, ଏପରି ସମ୍ଭାବ୍ୟ ଯୋଡ଼ି ସଂଖ୍ୟା ହେଉଛି <b>2</b> ।"
+      },
+      {
+        id: 2,
+        en: "The LCM of <i>x</i><sup>2</sup> - 8<i>x</i> + 15 and <i>x</i><sup>2</sup> - 5<i>x</i> + 6 is:",
+        hi: "<i>x</i><sup>2</sup> - 8<i>x</i> + 15 और <i>x</i><sup>2</sup> - 5<i>x</i> + 6 का ल.स.प. (LCM) है:",
+        or: "<i>x</i><sup>2</sup> - 8<i>x</i> + 15 ଏବଂ <i>x</i><sup>2</sup> - 5<i>x</i> + 6 ର ଲ.ସା.ଗୁ. (LCM) କେତେ ହେବ?",
+        options: {
+          en: [
+            "(<i>x</i> - 6)<sup>2</sup>(<i>x</i> + 1)(<i>x</i> - 3)",
+            "(<i>x</i> + 6)(<i>x</i> + 1)(<i>x</i> - 3)",
+            "(<i>x</i> - 2)(<i>x</i> - 3)(<i>x</i> - 5)",
+            "(<i>x</i> - 2)(<i>x</i> - 3)(<i>x</i> + 5)"
+          ],
+          hi: [
+            "(<i>x</i> - 6)<sup>2</sup>(<i>x</i> + 1)(<i>x</i> - 3)",
+            "(<i>x</i> + 6)(<i>x</i> + 1)(<i>x</i> - 3)",
+            "(<i>x</i> - 2)(<i>x</i> - 3)(<i>x</i> - 5)",
+            "(<i>x</i> - 2)(<i>x</i> - 3)(<i>x</i> + 5)"
+          ],
+          or: [
+            "(<i>x</i> - 6)<sup>2</sup>(<i>x</i> + 1)(<i>x</i> - 3)",
+            "(<i>x</i> + 6)(<i>x</i> + 1)(<i>x</i> - 3)",
+            "(<i>x</i> - 2)(<i>x</i> - 3)(<i>x</i> - 5)",
+            "(<i>x</i> - 2)(<i>x</i> - 3)(<i>x</i> + 5)"
+          ]
+        },
+        correctIndex: 2, // Option 'c'
+        exp_en: "Let's factorize both quadratic equations:<br>1. <i>x</i><sup>2</sup> - 8<i>x</i> + 15 = <i>x</i><sup>2</sup> - 5<i>x</i> - 3<i>x</i> + 15 = <i>x</i>(<i>x</i> - 5) - 3(<i>x</i> - 5) = (<i>x</i> - 3)(<i>x</i> - 5)<br>2. <i>x</i><sup>2</sup> - 5<i>x</i> + 6 = <i>x</i><sup>2</sup> - 3<i>x</i> - 2<i>x</i> + 6 = <i>x</i>(<i>x</i> - 3) - 2(<i>x</i> - 3) = (<i>x</i> - 2)(<i>x</i> - 3)<br>LCM is the product of the highest power of all distinct linear factors:<br>LCM = (<i>x</i> - 2)(<i>x</i> - 3)(<i>x</i> - 5).",
+        exp_hi: "दोनों द्विघात समीकरणों का गुणनखंड करते हैं:<br>1. <i>x</i><sup>2</sup> - 8<i>x</i> + 15 = (<i>x</i> - 3)(<i>x</i> - 5)<br>2. <i>x</i><sup>2</sup> - 5<i>x</i> + 6 = (<i>x</i> - 2)(<i>x</i> - 3)<br>ल.स.प. (LCM) सभी अलग-अलग रैखिक गुणनखंडों के उच्चतम घात का गुणनफल होता है:<br>ल.स.प. = (<i>x</i> - 2)(<i>x</i> - 3)(<i>x</i> - 5)।",
+        exp_or: "ଉଭୟ ଦ୍ଵିଘାତ ସମୀକରଣର ଉତ୍ପାଦକ ବିଶ୍ଳେଷଣ କଲେ:<br>1. <i>x</i><sup>2</sup> - 8<i>x</i> + 15 = (<i>x</i> - 3)(<i>x</i> - 5)<br>2. <i>x</i><sup>2</sup> - 5<i>x</i> + 6 = (<i>x</i> - 2)(<i>x</i> - 3)<br>ଲ.ସା.ଗୁ. (LCM) ହେଉଛି ସମସ୍ତ ପୃଥକ ଉତ୍ପାଦକଗୁଡ଼ିକର ଗୁଣଫଳ:<br>ଲ.ସା.ଗୁ. = (<i>x</i> - 2)(<i>x</i> - 3)(<i>x</i> - 5) ।"
+      },
+      {
+        id: 3,
+        en: "If the highest common factor (HCF) of <i>x</i> and <i>y</i> is 15, then the HCF of 36<i>x</i><sup>2</sup> - 81<i>y</i><sup>2</sup> and 81<i>x</i><sup>2</sup> - 9<i>y</i><sup>2</sup> is divisible by _________.",
+        hi: "यदि <i>x</i> और <i>y</i> का महत्तम समापवर्तक (HCF) 15 है, तो 36<i>x</i><sup>2</sup> - 81<i>y</i><sup>2</sup> और 81<i>x</i><sup>2</sup> - 9<i>y</i><sup>2</sup> का HCF ______ से विभाज्य होगा।",
+        or: "ଯଦି <i>x</i> ଏବଂ <i>y</i> ର ଗରିଷ୍ଠ ସାଧାରଣ ଗୁଣନୀୟକ (HCF) 15 ହୁଏ, ତେବେ 36<i>x</i><sup>2</sup> - 81<i>y</i><sup>2</sup> ଏବଂ 81<i>x</i><sup>2</sup> - 9<i>y</i><sup>2</sup> ର HCF ______ ଦ୍ଵାରା ବିଭାଜ୍ୟ ହେବ ।",
+        options: {
+          en: ["135", "180", "120", "90"],
+          hi: ["135", "180", "120", "90"],
+          or: ["135", "180", "120", "90"]
+        },
+        correctIndex: 0, // Option 'a'
+        exp_en: "Given HCF(<i>x</i>, <i>y</i>) = 15. Thus, <i>x</i> and <i>y</i> are multiples of 15. Let <i>x</i> = 15<i>a</i> and <i>y</i> = 15<i>b</i>.<br>1. 36<i>x</i><sup>2</sup> - 81<i>y</i><sup>2</sup> = 9(4<i>x</i><sup>2</sup> - 9<i>y</i><sup>2</sup>) = 9[4(15<i>a</i>)<sup>2</sup> - 9(15<i>b</i>)<sup>2</sup>] = 9 × 225(4<i>a</i><sup>2</sup> - 9<i>b</i><sup>2</sup>) = 2025(4<i>a</i><sup>2</sup> - 9<i>b</i><sup>2</sup>)<br>2. 81<i>x</i><sup>2</sup> - 9<i>y</i><sup>2</sup> = 9(9<i>x</i><sup>2</sup> - <i>y</i><sup>2</sup>) = 9[9(15<i>a</i>)<sup>2</sup> - (15<i>b</i>)<sup>2</sup>] = 9 × 225(9<i>a</i><sup>2</sup> - <i>b</i><sup>2</sup>) = 2025(9<i>a</i><sup>2</sup> - <i>b</i><sup>2</sup>)<br>The HCF of these two expressions must be a multiple of 2025. We check which of the options divides 2025:<br>2025 / 135 = 15 (divisible). None of the other options (180, 120, 90) divide 2025 exactly.<br>So, the HCF is divisible by 135.",
+        exp_hi: "दिया गया है HCF(<i>x</i>, <i>y</i>) = 15। मान लीजिए <i>x</i> = 15<i>a</i> और <i>y</i> = 15<i>b</i>।<br>1. 36<i>x</i><sup>2</sup> - 81<i>y</i><sup>2</sup> = 9(4<i>x</i><sup>2</sup> - 9<i>y</i><sup>2</sup>) = 9 × 225(4<i>a</i><sup>2</sup> - 9<i>b</i><sup>2</sup>) = 2025(4<i>a</i><sup>2</sup> - 9<i>b</i><sup>2</sup>)<br>2. 81<i>x</i><sup>2</sup> - 9<i>y</i><sup>2</sup> = 9 × 225(9<i>a</i><sup>2</sup> - <i>b</i><sup>2</sup>) = 2025(9<i>a</i><sup>2</sup> - <i>b</i><sup>2</sup>)<br>दोनों व्यंजकों का HCF कम से कम 2025 का एक गुणज होगा। विकल्पों में से, केवल 135 ही 2025 को पूर्णतः विभाजित करता है (2025 / 135 = 15)।<br>इसलिए, HCF 135 से विभाज्य होगा।",
+        exp_or: "ପ୍ରଦତ୍ତ ଗ.ସା.ଗୁ.(<i>x</i>, <i>y</i>) = 15 । ମନେକରନ୍ତୁ <i>x</i> = 15<i>a</i> ଏବଂ <i>y</i> = 15<i>b</i> ।<br>1. 36<i>x</i><sup>2</sup> - 81<i>y</i><sup>2</sup> = 9(4<i>x</i><sup>2</sup> - 9<i>y</i><sup>2</sup>) = 9 × 225(4<i>a</i><sup>2</sup> - 9<i>b</i><sup>2</sup>) = 2025(4<i>a</i><sup>2</sup> - 9<i>b</i><sup>2</sup>)<br>2. 81<i>x</i><sup>2</sup> - 9<i>y</i><sup>2</sup> = 9 × 225(9<i>a</i><sup>2</sup> - <i>b</i><sup>2</sup>) = 2025(9<i>a</i><sup>2</sup> - <i>b</i><sup>2</sup>)<br>ଏହି ଦୁଇଟି ବହୁପଦୀର ଗ.ସା.ଗୁ. ଅତିକମରେ 2025 ର ଗୁଣିତକ ହେବ । ବିକଳ୍ପଗୁଡ଼ିକ ମଧ୍ୟରୁ କେବଳ 135 ହିଁ 2025 କୁ ସମ୍ପୂର୍ଣ୍ଣ ଭାଗ କରେ (2025 / 135 = 15) ।<br>ଅତଏବ, ଗ.ସା.ଗୁ. 135 ଦ୍ଵାରା ବିଭାଜ୍ୟ ଅଟେ ।"
+      },
+      {
+        id: 4,
+        en: "The largest three-digit number that gives the same remainder 2 when divided by 2, 3, 5 and 9 is _________.",
+        hi: "तीन अंको की सबसे बड़ी संख्या जो 2, 3, 5 और 9 से विभाजित होने पर समान शेषफल 2 देती है, __________ है।",
+        or: "ତିନି ଅଙ୍କ ବିଶିଷ୍ଟ ସବୁଠାରୁ ବୃହତ୍ତମ ସଂଖ୍ୟା ଯାହାକୁ 2, 3, 5 ଏବଂ 9 ଦ୍ଵାରା ଭାଗ କଲେ ପ୍ରତ୍ୟେକ କ୍ଷେତ୍ରରେ ଭାଗଶେଷ 2 ରହେ, ତାହା ହେଉଛି _________ ।",
+        options: {
+          en: ["984", "992", "998", "999"],
+          hi: ["984", "992", "998", "999"],
+          or: ["984", "992", "998", "999"]
+        },
+        correctIndex: 1, // Option 'b'
+        exp_en: "Let's find the LCM of the divisors 2, 3, 5, and 9:<br>LCM(2, 3, 5, 9) = 90.<br>Any number satisfying the condition is of the form: 90<i>k</i> + 2.<br>The largest three-digit number divisible by 90 is 990 (for <i>k</i> = 11).<br>Adding the common remainder 2, we get 990 + 2 = <b>992</b>.",
+        exp_hi: "भाजकों 2, 3, 5, और 9 का ल.स.प. (LCM) ज्ञात करते हैं:<br>LCM(2, 3, 5, 9) = 90।<br>वांछित संख्या इस रूप में होगी: 90<i>k</i> + 2।<br>90 से विभाज्य तीन अंकों की सबसे बड़ी संख्या 990 है (जब <i>k</i> = 11)।<br>समान शेषफल 2 जोड़ने पर: 990 + 2 = <b>992</b>।",
+        exp_or: "ଭାଜକ 2, 3, 5 ଏବଂ 9 ର ଲ.ସା.ଗୁ. (LCM) = 90 ।<br>ଆବଶ୍ୟକୀୟ ସଂଖ୍ୟାଟି 90<i>k</i> + 2 ରୂପରେ ରହିବ ।<br>90 ଦ୍ଵାରା ବିଭାଜ୍ୟ ସବୁଠାରୁ ବୃହତ୍ତମ ତିନି ଅଙ୍କ ବିଶିଷ୍ଟ ସଂଖ୍ୟା ହେଉଛି 990 (ଯେତେବେଳେ <i>k</i> = 11) ।<br>ଭାଗଶେଷ 2 ଯୋଗ କଲେ ଆମେ ପାଇବା: 990 + 2 = <b>992</b> ।"
+      },
+      {
+        id: 5,
+        en: "What is the ratio between the HCF and LCM of the numbers whose LCM is 48 and the product of the numbers is 384?",
+        hi: "उन संख्याओं के महत्तम समापवर्तक (HCF) और लघुत्तम समापवर्त्य (LCM) के बीच का अनुपात क्या है जिनका लघुत्तम समापवर्त्य (LCM) 48 है और संख्याओं का गुणनफल 384 है?",
+        or: "ଯେଉଁ ସଂଖ୍ୟାଗୁଡ଼ିକର ଲ.ସା.ଗୁ. (LCM) 48 ଏବଂ ସେମାନଙ୍କର ଗୁଣଫଳ 384, ସେମାନଙ୍କର ଗ.ସା.ଗୁ. (HCF) ଏବଂ ଲ.ସା.ଗୁ. (LCM) ର ଅନୁପାତ କେତେ ହେବ?",
+        options: {
+          en: ["1:4", "1:6", "1:3", "2:5"],
+          hi: ["1:4", "1:6", "1:3", "2:5"],
+          or: ["1:4", "1:6", "1:3", "2:5"]
+        },
+        correctIndex: 1, // Option 'b'
+        exp_en: "We know that for any two numbers:<br>Product of numbers = HCF × LCM<br>⇒ 384 = HCF × 48<br>⇒ HCF = 384 / 48 = 8.<br>Ratio of HCF to LCM = 8 : 48 = 1 : 6.",
+        exp_hi: "हम जानते हैं कि किन्हीं दो संख्याओं के लिए:<br>संख्याओं का गुणनफल = HCF × LCM<br>⇒ 384 = HCF × 48<br>⇒ HCF = 384 / 48 = 8।<br>HCF और LCM के बीच का अनुपात = 8 : 48 = 1 : 6।",
+        exp_or: "ଆମେ ଜାଣୁ ଯେ: ଦୁଇଟି ସଂଖ୍ୟାର ଗୁଣଫଳ = ଗ.ସା.ଗୁ. (HCF) × ଲ.ସା.ଗୁ. (LCM)<br>⇒ 384 = HCF × 48<br>⇒ HCF = 384 / 48 = 8 ।<br>ଗ.ସା.ଗୁ. ଏବଂ ଲ.ସା.ଗୁ. ର ଅନୁପାତ = 8 : 48 = 1 : 6 ।"
+      },
+      {
+        id: 6,
+        en: "Two numbers are in the ratio of 6 : 5. If their HCF is 3, then what is the LCM of the two numbers?",
+        hi: "दो संख्याएं 6 : 5 के अनुपात में हैं। यदि उनका महत्तम समापवर्तक (HCF) 3 है, तो दोनों संख्याओं का लघुत्तम समापवर्त्य (LCM) कितना होगा?",
+        or: "ଦୁଇଟି ସଂଖ୍ୟା 6 : 5 ଅନୁପାତରେ ଅଛନ୍ତି । ଯଦି ସେମାନଙ୍କର ଗ.ସା.ଗୁ. (HCF) 3 ହୁଏ, ତେବେ ସଂଖ୍ୟା ଦୁଇଟିର ଲ.ସା.ଗୁ. (LCM) କେତେ ହେବ?",
+        options: {
+          en: ["64", "110", "90", "80"],
+          hi: ["64", "110", "90", "80"],
+          or: ["64", "110", "90", "80"]
+        },
+        correctIndex: 2, // Option 'c'
+        exp_en: "Let the two numbers be 6<i>x</i> and 5<i>x</i>.<br>Their HCF is <i>x</i>. We are given HCF = 3, so <i>x</i> = 3.<br>The numbers are 6 × 3 = 18 and 5 × 3 = 15.<br>The LCM of 18 and 15 is:<br>LCM = 6 × 5 × HCF = 30 × 3 = 90.",
+        exp_hi: "मान लीजिए दो संख्याएँ 6<i>x</i> और 5<i>x</i> हैं।<br>उनका HCF <i>x</i> होगा। दिया गया है HCF = 3, इसलिए <i>x</i> = 3।<br>संख्याएँ 18 और 15 हैं।<br>ल.स.प. (LCM) = 6 × 5 × HCF = 30 × 3 = 90।",
+        exp_or: "ମନେକରନ୍ତୁ ଦୁଇଟି ସଂଖ୍ୟା 6<i>x</i> ଏବଂ 5<i>x</i> ।<br>ସେମାନଙ୍କର ଗ.ସା.ଗୁ. (HCF) ହେଉଛି <i>x</i> । ପ୍ରଦତ୍ତ ଗ.ସା.ଗୁ. = 3, ତେଣୁ <i>x</i> = 3 ।<br>ସଂଖ୍ୟା ଦୁଇଟି ହେଲା 18 ଏବଂ 15 ।<br>ଲ.ସା.ଗୁ. (LCM) = 6 × 5 × ଗ.ସା.ଗୁ. = 30 × 3 = 90 ।"
+      },
+      {
+        id: 7,
+        en: "The HCF of two numbers is 17 and the other two factors of their LCM are 11 and 19. The smaller of the two numbers is:",
+        hi: "दो संख्याओं का HCF 17 है और उनके LCM के अन्य दो गुणनखंड 11 और 19 हैं। दोनों संख्याओं में से छोटी संख्या होगी:",
+        or: "ଦୁଇଟି ସଂଖ୍ୟାର ଗ.ସା.ଗୁ. (HCF) 17 ଅଟେ ଏବଂ ସେମାନଙ୍କର ଲ.ସା.ଗୁ. (LCM) ର ଅନ୍ୟ ଦୁଇଟି ଗୁଣନୀୟକ 11 ଏବଂ 19 ଅଟେ । ସେମାନଙ୍କ ମଧ୍ୟରୁ କ୍ଷୁଦ୍ରତମ ସଂଖ୍ୟାଟି କେତେ?",
+        options: {
+          en: ["209", "187", "323", "306"],
+          hi: ["209", "187", "323", "306"],
+          or: ["209", "187", "323", "306"]
+        },
+        correctIndex: 1, // Option 'b'
+        exp_en: "Since the HCF is 17, the two numbers are multiples of 17: 17<i>a</i> and 17<i>b</i>.<br>The LCM of these numbers is 17 × <i>a</i> × <i>b</i>.<br>The other two factors of the LCM (besides HCF) are given as 11 and 19.<br>So, the two numbers are 17 × 11 and 17 × 19.<br>The smaller number is 17 × 11 = 187.",
+        exp_hi: "चूंकि HCF 17 है, संख्याएँ 17<i>a</i> और 17<i>b</i> होंगी।<br>ल.स.प. (LCM) = 17 × <i>a</i> × <i>b</i> होगा।<br>ल.स.प. के अन्य दो गुणनखंड 11 और 19 हैं।<br>इसलिए, दो संख्याएँ 17 × 11 और 17 × 19 हैं।<br>छोटी संख्या = 17 × 11 = 187।",
+        exp_or: "ଯେହେତୁ ଗ.ସା.ଗୁ. 17, ସଂଖ୍ୟା ଦୁଇଟି 17<i>a</i> ଏବଂ 17<i>b</i> ହେଉଛି ।<br>ଲ.ସା.ଗୁ. (LCM) = 17 × <i>a</i> × <i>b</i> ।<br>ଲ.ସା.ଗୁ. ର ଅନ୍ୟ ଦୁଇଟି ଗୁଣନୀୟକ 11 ଏବଂ 19 ଦିଆଯାଇଛି ।<br>ତେଣୁ ସଂଖ୍ୟା ଦୁଇଟି ହେଲା 17 × 11 ଏବଂ 17 × 19 ।<br>କ୍ଷୁଦ୍ରତମ ସଂଖ୍ୟା = 17 × 11 = 187 ।"
+      },
+      {
+        id: 8,
+        en: "The HCF of three numbers 72, 108 and 2010 is:",
+        hi: "तीन संख्याओं 72, 108 और 2010 का महत्तम समापवर्तक (HCF) क्या है?",
+        or: "ତିନୋଟି ସଂଖ୍ୟା 72, 108 ଏବଂ 2010 ର ଗ.ସା.ଗୁ. (HCF) କେତେ?",
+        options: {
+          en: ["18", "6", "12", "5"],
+          hi: ["18", "6", "12", "5"],
+          or: ["18", "6", "12", "5"]
+        },
+        correctIndex: 1, // Option 'b'
+        exp_en: "Let's perform prime factorization:<br>72 = 2<sup>3</sup> × 3<sup>2</sup><br>108 = 2<sup>2</sup> × 3<sup>3</sup><br>2010 = 2 × 3 × 5 × 67<br>HCF is the product of the lowest power of all common prime factors:<br>Common prime factors are 2 and 3.<br>HCF = 2<sup>1</sup> × 3<sup>1</sup> = 6.",
+        exp_hi: "अभाज्य गुणनखंडन करते हैं:<br>72 = 2<sup>3</sup> × 3<sup>2</sup><br>108 = 2<sup>2</sup> × 3<sup>3</sup><br>2010 = 2 × 3 × 5 × 67<br>HCF सभी सामान्य अभाज्य गुणनखंडों की न्यूनतम घात का गुणनफल है:<br>सामान्य अभाज्य गुणनखंड 2 और 3 हैं।<br>HCF = 2 × 3 = 6।",
+        exp_or: "ଉତ୍ପାଦକ ବିଶ୍ଳେଷଣ କଲେ:<br>72 = 2<sup>3</sup> × 3<sup>2</sup><br>108 = 2<sup>2</sup> × 3<sup>3</sup><br>2010 = 2 × 3 × 5 × 67<br>ଗ.ସା.ଗୁ. (HCF) ହେଉଛି ସାଧାରଣ ଉତ୍ପାଦକଗୁଡ଼ିକର ସର୍ବନିମ୍ନ ଘାତର ଗୁଣଫଳ:<br>ସାଧାରଣ ଉତ୍ପାଦକ ହେଉଛି 2 ଏବଂ 3 ।<br>ଗ.ସା.ଗୁ. = 2 × 3 = 6 ।"
+      },
+      {
+        id: 9,
+        en: "The least number that should be added to 35460 so that the sum is exactly divisible by 3, 4, 5 and 7 is:",
+        hi: "35460 में कौन-सी सबसे छोटी संख्या जोड़ी जानी चाहिए ताकि योगफल 3, 4, 5 और 7 द्वारा पूर्णतः विभाज्य हो?",
+        or: "35460 ରେ କେଉଁ କ୍ଷୁଦ୍ରତମ ସଂଖ୍ୟା ଯୋଗ କଲେ ଯୋଗଫଳ 3, 4, 5 ଏବଂ 7 ଦ୍ଵାରା ସମ୍ପୂର୍ଣ୍ଣ ବିଭାଜ୍ୟ ହେବ?",
+        options: {
+          en: ["84", "420", "240", "180"],
+          hi: ["84", "420", "240", "180"],
+          or: ["84", "420", "240", "180"]
+        },
+        correctIndex: 2, // Option 'c'
+        exp_en: "LCM of 3, 4, 5, and 7 is 3 × 4 × 5 × 7 = 420.<br>Dividing 35460 by 420:<br>35460 = 84 × 420 + 180.<br>The remainder is 180.<br>To find the least number to add: Divisor - Remainder = 420 - 180 = 240.<br>(Note: 180 is the remainder; to make the number divisible by adding a value, we must add 240, so that the sum becomes 35700 which is exactly 420 × 85).",
+        exp_hi: "3, 4, 5, और 7 का ल.स.प. (LCM) = 3 × 4 × 5 × 7 = 420 है।<br>35460 को 420 से भाग देने पर:<br>35460 = 84 × 420 + 180 (शेषफल = 180)।<br>जोड़ी जाने वाली न्यूनतम संख्या = भाजक - शेषफल = 420 - 180 = 240।<br>(नोट: 180 शेषफल है जिसे संख्या में से घटाया जा सकता है, लेकिन जोड़ने के लिए हमें 240 जोड़ना होगा ताकि योग 35700 हो जाए जो 420 से विभाज्य है)।",
+        exp_or: "3, 4, 5 ଏବଂ 7 ର ଲ.ସା.ଗୁ. (LCM) = 3 × 4 × 5 × 7 = 420 ।<br>35460 କୁ 420 ଦ୍ଵାରା ଭାଗ କଲେ:<br>35460 = 84 × 420 + 180 (ଭାଗଶେଷ = 180) ।<br>ଯୋଗ ହେବାକୁ ଥିବା ସର୍ବନିମ୍ନ ସଂଖ୍ୟା = ଭାଜକ - ଭାଗଶେଷ = 420 - 180 = 240 ।<br>(ସୂଚନା: 180 ହେଉଛି ଭାଗଶେଷ ଯାହାକୁ ବିୟୋଗ କରାଯାଇଥାଏ, ମାତ୍ର ସଂଖ୍ୟା ଯୋଗ କରିବା ପାଇଁ ଆମକୁ 240 ଯୋଗ କରିବାକୁ ହେବ ଯାହାଦ୍ୱାରା ଯୋଗଫଳ 35700 ହେବ ଏବଂ ଏହା 420 ଦ୍ଵାରା ସମ୍ପୂର୍ଣ୍ଣ ବିଭାଜ୍ୟ ହେବ) ।"
+      },
+      {
+        id: 10,
+        en: "The LCM of the two numbers is 4104 and the HCF is 9. If one of the numbers is 171, find the other.",
+        hi: "दो संख्याओं का लसप (LCM) 4104 और मसप (HCF) 9 है। यदि संख्याओं में से एक संख्या 171 है, तो दूसरी संख्या ज्ञात कीजिए।",
+        or: "ଦୁଇଟି ସଂଖ୍ୟାର ଲ.ସା.ଗୁ. (LCM) 4104 ଏବଂ ଗ.ସା.ଗୁ. (HCF) 9 ଅଟେ । ଯଦି ଗୋଟିଏ ସଂଖ୍ୟା 171 ହୁଏ, ତେବେ ଅନ୍ୟ ସଂଖ୍ୟାଟି କେତେ?",
+        options: {
+          en: ["218", "215", "220", "216"],
+          hi: ["218", "215", "220", "216"],
+          or: ["218", "215", "220", "216"]
+        },
+        correctIndex: 3, // Option 'd'
+        exp_en: "We know that:<br>Product of two numbers = HCF × LCM<br>⇒ 171 × <i>Second Number</i> = 9 × 4104<br>⇒ <i>Second Number</i> = (9 × 4104) / 171 = 4104 / 19 = 216.",
+        exp_hi: "हम जानते हैं कि:<br>दो संख्याओं का गुणनफल = HCF × LCM<br>⇒ 171 × <i>दूसरी संख्या</i> = 9 × 4104<br>⇒ <i>दूसरी संख्या</i> = (9 × 4104) / 171 = 4104 / 19 = 216।",
+        exp_or: "ଆମେ ଜାଣୁ ଯେ:<br>ଦୁଇଟି ସଂଖ୍ୟାର ଗୁଣଫଳ = ଗ.ସା.ଗୁ. (HCF) × ଲ.ସା.ଗୁ. (LCM)<br>⇒ 171 × <i>ଦ୍ଵିତୀୟ ସଂଖ୍ୟା</i> = 9 × 4104<br>⇒ <i>ଦ୍ଵିତୀୟ ସଂଖ୍ୟା</i> = (9 × 4104) / 171 = 4104 / 19 = 216 ।"
+      },
+      {
+        id: 11,
+        en: "Find the greatest number that will divide 49, 147 and 322 to leave the same remainder in each case.",
+        hi: "वह बड़ी से बड़ी संख्या ज्ञात कीजिए, जिससे 49, 147 और 322 को विभाजित करने पर प्रत्येक स्थिति में समान शेषफल प्राप्त हो।",
+        or: "ସେହି ବୃହତ୍ତମ ସଂଖ୍ୟାଟି କେତେ ଯାହା ଦ୍ଵାରା 49, 147 ଏବଂ 322 କୁ ଭାଗ କଲେ ପ୍ରତ୍ୟେକ କ୍ଷେତ୍ରରେ ସମାନ ଭାଗଶେଷ ରହେ?",
+        options: {
+          en: ["9", "5", "7", "8"],
+          hi: ["9", "5", "7", "8"],
+          or: ["9", "5", "7", "8"]
+        },
+        correctIndex: 2, // Option 'c'
+        exp_en: "The greatest number that divides <i>A</i>, <i>B</i>, and <i>C</i> leaving the same remainder is the HCF of their absolute differences:<br>|147 - 49| = 98<br>|322 - 147| = 175<br>|322 - 49| = 273<br>Let's find HCF(98, 175, 273):<br>98 = 2 × 7<sup>2</sup> = 7 × 14<br>175 = 5<sup>2</sup> × 7 = 7 × 25<br>273 = 3 × 7 × 13 = 7 × 39<br>The HCF is 7.",
+        exp_hi: "वह अधिकतम संख्या जो <i>A</i>, <i>B</i>, और <i>C</i> को विभाजित कर समान शेषफल छोड़े, वह उनके अंतरों का HCF होती है:<br>|147 - 49| = 98<br>|322 - 147| = 175<br>|322 - 49| = 273<br>HCF(98, 175, 273) ज्ञात करने पर:<br>98 = 7 × 14, 175 = 7 × 25, 273 = 7 × 39।<br>अतः HCF = 7 है।",
+        exp_or: "ଆବଶ୍ୟକୀୟ ସଂଖ୍ୟା ହେଉଛି ସଂଖ୍ୟାଗୁଡ଼ିକର ଅନ୍ତରର ଗ.ସା.ଗୁ. (HCF):<br>|147 - 49| = 98<br>|322 - 147| = 175<br>|322 - 49| = 273<br>98, 175 ଏବଂ 273 ର ଗ.ସା.ଗୁ. ହେଉଛି 7 ।<br>ଅତଏବ, ସେହି ବୃହତ୍ତମ ସଂଖ୍ୟାଟି ହେଉଛି 7 ।"
+      },
+      {
+        id: 12,
+        en: "What is the smallest perfect square which is completely divisible by each of 16, 18 and 36?",
+        hi: "वह सबसे छोटा पूर्ण वर्ग कौन सा है जो 16, 18 और 36 में से प्रत्येक से पूर्णतः विभाज्य है?",
+        or: "ସେହି କ୍ଷୁଦ୍ରତମ ପୂର୍ଣ୍ଣ ବର୍ଗ ସଂଖ୍ୟାଟି କେତେ ଯାହା 16, 18 ଏବଂ 36 ପ୍ରତ୍ୟେକ ଦ୍ଵାରା ସମ୍ପୂର୍ଣ୍ଣ ବିଭାଜ୍ୟ?",
+        options: {
+          en: ["144", "81", "196", "169"],
+          hi: ["144", "81", "196", "169"],
+          or: ["144", "81", "196", "169"]
+        },
+        correctIndex: 0, // Option 'a'
+        exp_en: "First, find the LCM of 16, 18, and 36:<br>16 = 2<sup>4</sup><br>18 = 2 × 3<sup>2</sup><br>36 = 2<sup>2</sup> × 3<sup>2</sup><br>LCM = 2<sup>4</sup> × 3<sup>2</sup> = 16 × 9 = 144.<br>Since 144 is already a perfect square (12<sup>2</sup> = 144), the smallest perfect square divisible by all three numbers is 144.",
+        exp_hi: "सर्वप्रथम 16, 18 और 36 का ल.स.प. (LCM) ज्ञात करते हैं:<br>16 = 2<sup>4</sup><br>18 = 2 × 3<sup>2</sup><br>36 = 2<sup>2</sup> × 3<sup>2</sup><br>ल.स.प. (LCM) = 144।<br>चूंकि 144 स्वयं एक पूर्ण वर्ग है (12<sup>2</sup> = 144), अतः वांछित न्यूनतम पूर्ण वर्ग 144 है।",
+        exp_or: "ପ୍ରଥମେ 16, 18 ଏବଂ 36 ର ଲ.ସା.ଗୁ. (LCM) ବାହାର କରିବା:<br>16 = 2<sup>4</sup><br>18 = 2 × 3<sup>2</sup><br>36 = 2<sup>2</sup> × 3<sup>2</sup><br>ଲ.ସା.ଗୁ. = 144 ।<br>ଯେହେତୁ 144 ଏକ ପୂର୍ଣ୍ଣ ବର୍ଗ ସଂଖ୍ୟା (12<sup>2</sup> = 144), ତେଣୁ ସର୍ବନିମ୍ନ ପୂର୍ଣ୍ଣ ବର୍ଗ ସଂଖ୍ୟାଟି ହେଉଛି 144 ।"
+      },
+      {
+        id: 13,
+        en: "The largest five-digit number which when divided by 7, 9 and 11, leaves the same remainder as 3 in each case, is:",
+        hi: "पाँच अंकों वाली सबसे बड़ी संख्या कौन सी है, जिसे 7, 9 और 11 से विभाजित करने पर प्रत्येक स्थिति में समान शेषफल 3 बचता है?",
+        or: "ପାଞ୍ଚ ଅଙ୍କ ବିଶିଷ୍ଟ ସବୁଠାରୁ ବୃହତ୍ତମ ସଂଖ୍ୟା କେଉଁଟି ଯାହାକୁ 7, 9 ଏବଂ 11 ଦ୍ଵାରା ଭାଗ କଲେ ପ୍ରତ୍ୟେକ କ୍ଷେତ୍ରରେ 3 ଭାଗଶେଷ ରହେ?",
+        options: {
+          en: ["95840", "98685", "96720", "99795"],
+          hi: ["95840", "98685", "96720", "99795"],
+          or: ["95840", "98685", "96720", "99795"]
+        },
+        correctIndex: 3, // Option 'd'
+        exp_en: "LCM of 7, 9, and 11 is 7 × 9 × 11 = 693.<br>The largest 5-digit number is 99999.<br>On dividing 99999 by 693:<br>99999 = 144 × 693 + 207.<br>The largest 5-digit number exactly divisible by 693 is 99999 - 207 = 99792.<br>To leave a remainder of 3 in each case, add 3:<br>Required number = 99792 + 3 = 99795.",
+        exp_hi: "7, 9 और 11 का ल.स.प. (LCM) = 7 × 9 × 11 = 693 है।<br>पांच अंकों की सबसे बड़ी संख्या 99999 है।<br>99999 को 693 से विभाजित करने पर शेषफल 207 प्राप्त होता है।<br>693 से विभाज्य सबसे बड़ी संख्या = 99999 - 207 = 99792 है।<br>प्रत्येक स्थिति में 3 शेषफल प्राप्त करने के लिए: 99792 + 3 = 99795।",
+        exp_or: "7, 9 ଏବଂ 11 ର ଲ.ସା.ଗୁ. = 7 × 9 × 11 = 693 ।<br>ପାଞ୍ଚ ଅଙ୍କ ବିଶିଷ୍ଟ ସବୁଠାରୁ ବୃହତ୍ତମ ସଂଖ୍ୟା ହେଉଛି 99999 ।<br>99999 କୁ 693 ଦ୍ଵାରା ଭାଗ କଲେ ଭାଗଶେଷ 207 ମିଳେ ।<br>693 ଦ୍ଵାରା ବିଭାଜ୍ୟ ସର୍ବବୃହତ ସଂଖ୍ୟା = 99999 - 207 = 99792 ।<br>ଭାଗଶେଷ 3 ରଖିବା ପାଇଁ ଆବଶ୍ୟକ ସଂଖ୍ୟା = 99792 + 3 = 99795 ।"
+      },
+      {
+        id: 14,
+        en: "Find the greatest 5-digit number which is divisible by 11, 33, 99 and 121.",
+        hi: "5 अंकों की सबसे बड़ी संख्या ज्ञात कीजिए जो 11, 33, 99 और 121 से विभाज्य हो।",
+        or: "ପାଞ୍ଚ ଅଙ୍କ ବିଶିଷ୍ଟ ସବୁଠାରୁ ବୃହତ୍ତମ ସଂଖ୍ୟାଟି କେତେ ଯାହା 11, 33, 99 ଏବଂ 121 ଦ୍ଵାରା ସମ୍ପୂର୍ଣ୍ଣ ବିଭାଜ୍ୟ?",
+        options: {
+          en: ["90099", "99990", "99099", "90909"],
+          hi: ["90099", "99990", "99099", "90909"],
+          or: ["90099", "99990", "99099", "90909"]
+        },
+        correctIndex: 2, // Option 'c'
+        exp_en: "Let's find the LCM of 11, 33, 99, and 121:<br>11 = 11<br>33 = 3 × 11<br>99 = 3<sup>2</sup> × 11<br>121 = 11<sup>2</sup><br>LCM = 3<sup>2</sup> × 11<sup>2</sup> = 9 × 121 = 1089.<br>Divide the largest 5-digit number (99999) by 1089:<br>99999 = 91 × 1089 + 900.<br>The largest 5-digit number divisible by 1089 is 99999 - 900 = 99099.",
+        exp_hi: "11, 33, 99 और 121 का ल.स.प. (LCM) ज्ञात करते हैं:<br>LCM = 3<sup>2</sup> × 11<sup>2</sup> = 1089।<br>पांच अंकों की सबसे बड़ी संख्या (99999) को 1089 से भाग देते हैं:<br>99999 = 91 × 1089 + 900।<br>अतः वांछित संख्या 99999 - 900 = 99099 है।",
+        exp_or: "11, 33, 99 ଏବଂ 121 ର ଲ.ସା.ଗୁ. (LCM) ବାହାର କରିବା:<br>LCM = 3<sup>2</sup> × 11<sup>2</sup> = 1089 ।<br>ପାଞ୍ଚ ଅଙ୍କ ବିଶିଷ୍ଟ ସବୁଠାରୁ ବୃହତ୍ତମ ସଂଖ୍ୟା (99999) କୁ 1089 ଦ୍ଵାରା ଭାଗ କଲେ:<br>99999 = 91 × 1089 + 900 ।<br>ଆବଶ୍ୟକୀୟ ସଂଖ୍ୟା = 99999 - 900 = 99099 ।"
+      },
+      {
+        id: 15,
+        en: "The sum of the least common multiple and greatest common divisor of two numbers and the difference between them are 512 and 496 respectively. If one of the numbers is 72, then what is the other number?",
+        hi: "दो संख्याओं के लघुत्तम समापवर्त्य (LCM) और महत्तम समापवर्तक (HCF) का योग तथा उनके बीच का अंतर क्रमशः 512 और 496 है। यदि उनमें एक संख्या 72 है, तो दूसरी संख्या कौनसी है?",
+        or: "ଦୁଇଟି ସଂଖ୍ୟାର ଲ.ସା.ଗୁ. (LCM) ଏବଂ ଗ.ସା.ଗୁ. (HCF) ର ଯୋଗଫଳ ଏବଂ ବିୟୋଗଫଳ ଯଥାକ୍ରମେ 512 ଏବଂ 496 ଅଟେ । ଯଦି ସେମାନଙ୍କ ମଧ୍ୟରୁ ଗୋଟିଏ ସଂଖ୍ୟା 72 ହୁଏ, ତେବେ ଅନ୍ୟ ସଂଖ୍ୟାଟି କେତେ?",
+        options: {
+          en: ["56", "64", "40", "80"],
+          hi: ["56", "64", "40", "80"],
+          or: ["56", "64", "40", "80"]
+        },
+        correctIndex: 0, // Option 'a'
+        exp_en: "Let LCM be <i>L</i> and HCF be <i>H</i>.<br>We are given:<br>1) <i>L</i> + <i>H</i> = 512<br>2) <i>L</i> - <i>H</i> = 496<br>Adding (1) and (2) gives: 2<i>L</i> = 1008 ⇒ <i>L</i> = 504.<br>Subtracting (2) from (1) gives: 2<i>H</i> = 16 ⇒ <i>H</i> = 8.<br>We know that Product of two numbers = LCM × HCF<br>⇒ 72 × <i>x</i> = 504 × 8<br>⇒ <i>x</i> = (504 × 8) / 72 = 56.",
+        exp_hi: "मान लीजिए ल.स.प. <i>L</i> और म.स.प. <i>H</i> है।<br>दिया गया है:<br>1) <i>L</i> + <i>H</i> = 512<br>2) <i>L</i> - <i>H</i> = 496<br>दोनों समीकरणों को जोड़ने पर: 2<i>L</i> = 1008 ⇒ <i>L</i> = 504।<br>घटाने पर: 2<i>H</i> = 16 ⇒ <i>H</i> = 8।<br>संख्याओं का गुणनफल = LCM × HCF ⇒ 72 × <i>x</i> = 504 × 8 ⇒ <i>x</i> = 56।",
+        exp_or: "ମନେକରନ୍ତୁ ଲ.ସା.ଗୁ. <i>L</i> ଏବଂ ଗ.ସା.ଗୁ. <i>H</i> ।<br>ପ୍ରଦତ୍ତ:<br>1) <i>L</i> + <i>H</i> = 512<br>2) <i>L</i> - <i>H</i> = 496<br>ଯୋଗ କଲେ ପାଇବା: 2<i>L</i> = 1008 ⇒ <i>L</i> = 504 ।<br>ବିୟୋଗ କଲେ ପାଇବା: 2<i>H</i> = 16 ⇒ <i>H</i> = 8 ।<br>ସଂଖ୍ୟାଦ୍ଵୟର ଗୁଣଫଳ = LCM × HCF ⇒ 72 × <i>x</i> = 504 × 8 ⇒ <i>x</i> = 56 ।"
+      },
+      {
+        id: 16,
+        en: "What is the HCF of (<i>x</i><sup>2</sup> + <i>bx</i> - <i>x</i> - <i>b</i>) and (<i>x</i><sup>2</sup> + <i>x</i>(<i>a</i> - 1) - <i>a</i>)?",
+        hi: "यदि (<i>x</i><sup>2</sup> + <i>bx</i> - <i>x</i> - <i>b</i>) और (<i>x</i><sup>2</sup> + <i>x</i>(<i>a</i> - 1) - <i>a</i>) का महत्तम समापवर्तक (HCF) क्या है?",
+        or: "(<i>x</i><sup>2</sup> + <i>bx</i> - <i>x</i> - <i>b</i>) ଏବଂ (<i>x</i><sup>2</sup> + <i>x</i>(<i>a</i> - 1) - <i>a</i>) ର ଗ.ସା.ଗୁ. (HCF) କେତେ?",
+        options: {
+          en: ["<i>x</i> + <i>b</i>", "<i>x</i> + <i>a</i>", "<i>x</i> + 1", "<i>x</i> - 1"],
+          hi: ["<i>x</i> + <i>b</i>", "<i>x</i> + <i>a</i>", "<i>x</i> + 1", "<i>x</i> - 1"],
+          or: ["<i>x</i> + <i>b</i>", "<i>x</i> + <i>a</i>", "<i>x</i> + 1", "<i>x</i> - 1"]
+        },
+        correctIndex: 3, // Option 'd'
+        exp_en: "Let's factorize both algebraic expressions:<br>1. <i>x</i><sup>2</sup> + <i>bx</i> - <i>x</i> - <i>b</i> = <i>x</i>(<i>x</i> + <i>b</i>) - 1(<i>x</i> + <i>b</i>) = (<i>x</i> - 1)(<i>x</i> + <i>b</i>)<br>2. <i>x</i><sup>2</sup> + <i>x</i>(<i>a</i> - 1) - <i>a</i> = <i>x</i><sup>2</sup> + <i>ax</i> - <i>x</i> - <i>a</i> = <i>x</i>(<i>x</i> + <i>a</i>) - 1(<i>x</i> + <i>a</i>) = (<i>x</i> - 1)(<i>x</i> + <i>a</i>)<br>The common linear factor in both expressions is (<i>x</i> - 1).<br>Therefore, HCF = <b><i>x</i> - 1</b>.",
+        exp_hi: "दोनों बीजगणितीय व्यंजकों का गुणनखंड करते हैं:<br>1. <i>x</i><sup>2</sup> + <i>bx</i> - <i>x</i> - <i>b</i> = <i>x</i>(<i>x</i> + <i>b</i>) - 1(<i>x</i> + <i>b</i>) = (<i>x</i> - 1)(<i>x</i> + <i>b</i>)<br>2. <i>x</i><sup>2</sup> + <i>x</i>(<i>a</i> - 1) - <i>a</i> = (<i>x</i> - 1)(<i>x</i> + <i>a</i>)<br>दोनों व्यंजकों में उभयनिष्ठ गुणनखंड (<i>x</i> - 1) है।<br>अतः HCF = <b><i>x</i> - 1</b> है।",
+        exp_or: "ଉଭୟ ବୀଜଗାଣିତିକ ବହୁପଦୀର ଉତ୍ପାଦକ ବାହାର କରିବା:<br>1. <i>x</i><sup>2</sup> + <i>bx</i> - <i>x</i> - <i>b</i> = <i>x</i>(<i>x</i> + <i>b</i>) - 1(<i>x</i> + <i>b</i>) = (<i>x</i> - 1)(<i>x</i> + <i>b</i>)<br>2. <i>x</i><sup>2</sup> + <i>x</i>(<i>a</i> - 1) - <i>a</i> = (<i>x</i> - 1)(<i>x</i> + <i>a</i>)<br>ଉଭୟରେ ସାଧାରଣ ଉତ୍ପାଦକଟି ହେଉଛି (<i>x</i> - 1) ।<br>ଅତଏବ, ଗ.ସା.ଗୁ. = <b><i>x</i> - 1</b> ।"
+      },
+      {
+        id: 17,
+        en: "The LCM of three different numbers is 150. Which of the following cannot be their HCF?",
+        hi: "तीन भिन्न संख्याओं का ल.स.प. (LCM) 150 है। निम्न में से कौन सा उनका म.स.प. (HCF) नही हो सकता है?",
+        or: "ତିନୋଟି ଭିନ୍ନ ସଂଖ୍ୟାର ଲ.ସା.ଗୁ. (LCM) 150 ଅଟେ । ନିମ୍ନଲିଖିତ ମଧ୍ୟରୁ କେଉଁଟି ସେମାନଙ୍କର ଗ.ସା.ଗୁ. (HCF) ହୋଇପାରିବ ନାହିଁ?",
+        options: {
+          en: ["15", "25", "50", "55"],
+          hi: ["15", "25", "50", "55"],
+          or: ["15", "25", "50", "55"]
+        },
+        correctIndex: 3, // Option 'd'
+        exp_en: "The HCF of any group of numbers must always divide their LCM exactly.<br>Let's check the options:<br>150 / 15 = 10 (divisible)<br>150 / 25 = 6 (divisible)<br>150 / 50 = 3 (divisible)<br>150 / 55 = 2.72 (not divisible)<br>Since 55 does not divide 150 exactly, it cannot be the HCF.",
+        exp_hi: "किसी भी संख्या समूह का HCF हमेशा उनके LCM को पूर्णतः विभाजित करना चाहिए।<br>विकल्पों की जाँच करने पर:<br>150 / 15 = 10 (विभाज्य)<br>150 / 25 = 6 (विभाज्य)<br>150 / 50 = 3 (विभाज्य)<br>150 / 55 = 2.72 (विभाज्य नहीं)<br>चूंकि 55 संख्या 150 को विभाजित नहीं करता, यह HCF नहीं हो सकता।",
+        exp_or: "ଯେକୌଣସି ସଂଖ୍ୟାଗୁଡ଼ିକର ଗ.ସା.ଗୁ. (HCF) ସେମାନଙ୍କର ଲ.ସା.ଗୁ. (LCM) କୁ ସମ୍ପୂର୍ଣ୍ଣ ଭାଗ କରିବା ଉଚିତ୍ ।<br>ପରୀକ୍ଷା କଲେ ପାଇବା:<br>150 / 15 = 10 (ବିଭାଜ୍ୟ)<br>150 / 25 = 6 (ବିଭାଜ୍ୟ)<br>150 / 50 = 3 (ବିଭାଜ୍ୟ)<br>150 / 55 = 2.72 (ଅବିଭାଜ୍ୟ)<br>ଯେହେତୁ 55, 150 କୁ ସମ୍ପୂର୍ଣ୍ଣ ଭାଗ କରେନାହିଁ, ଏହା ସେମାନଙ୍କର ଗ.ସା.ଗୁ. ହୋଇପାରିବ ନାହିଁ ।"
+      },
+      {
+        id: 18,
+        en: "Let <i>p</i>, <i>q</i> and <i>r</i> be natural numbers. If <i>m</i> is their LCM and <i>n</i> is their HCF, consider the following:<br>(I) <i>mn</i> = <i>pqr</i> if each <i>p</i>, <i>q</i> and <i>r</i> is Prime.<br>(II) <i>mn</i> = <i>pqr</i> if <i>p</i>, <i>q</i> and <i>r</i> are relatively Prime in pairs.<br>Which of the above statements is/are correct?",
+        hi: "माना कि <i>p</i>, <i>q</i> और <i>r</i> प्राकृतिक संख्याएं हैं। यदि <i>m</i> उनका ल.स.प. (LCM) है और <i>n</i> उनका म.स.प. (HCF) है। निम्न पर विचार कीजिए:<br>1. <i>mn</i> = <i>pqr</i> यदि <i>p</i>, <i>q</i> और <i>r</i> प्रत्येक अभाज्य संख्या है।<br>2. <i>mn</i> = <i>pqr</i> यदि <i>p</i>, <i>q</i> और <i>r</i> युग्म में सापेक्षतः अभाज्य संख्या है।<br>उपरोक्त में से कौन सा कथन सत्य है?",
+        or: "ମନେକରନ୍ତୁ <i>p</i>, <i>q</i> ଏବଂ <i>r</i> ହେଉଛି ଗଣନ ସଂଖ୍ୟା । ଯଦି ସେମାନଙ୍କର ଲ.ସା.ଗୁ. <i>m</i> ଏବଂ ଗ.ସା.ଗୁ. <i>n</i> ହୁଏ, ତେବେ ନିମ୍ନୋକ୍ତ କଥନଗୁଡ଼ିକୁ ବିଚାର କରନ୍ତୁ:<br>(I) <i>mn</i> = <i>pqr</i> ଯଦି <i>p</i>, <i>q</i> ଏବଂ <i>r</i> ପ୍ରତ୍ୟେକଟି ମୌଳିକ ସଂଖ୍ୟା ଅଟନ୍ତି ।<br>(II) <i>mn</i> = <i>pqr</i> ଯଦି <i>p</i>, <i>q</i> ଏବଂ <i>r</i> ପରସ୍ପର ମୌଳିକ (pairwise coprime) ଅଟନ୍ତି ।<br>ଉପରୋକ୍ତ କଥନଗୁଡ଼ିକ ମଧ୍ୟରୁ କେଉଁଟି/କେଉଁଗୁଡ଼ିକ ସଠିକ୍?",
+        options: {
+          en: ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+          hi: ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+          or: ["Only I", "Only II", "Both I and II", "Neither I nor II"]
+        },
+        correctIndex: 2, // Option 'c'
+        exp_en: "Let's analyze both conditions:<br>- In statement (II), if <i>p</i>, <i>q</i>, <i>r</i> are pairwise coprime, their HCF is 1 (<i>n</i> = 1) and their LCM is their product (<i>m</i> = <i>pqr</i>). Thus, <i>mn</i> = (<i>pqr</i>)(1) = <i>pqr</i>. Statement (II) is correct.<br>- In statement (I), if <i>p</i>, <i>q</i>, <i>r</i> are prime numbers, they are distinct prime numbers by convention (if identical, say 2, 2, 2, the condition fails, but for distinct primes, it holds). Since they are prime, they are also pairwise coprime, making statement (I) correct.<br>Thus, both I and II are correct statements.",
+        exp_hi: "दोनों स्थितियों का विश्लेषण करते हैं:<br>- कथन (II) में, यदि <i>p</i>, <i>q</i>, <i>r</i> युग्मों में सह-अभाज्य हैं, तो उनका HCF 1 (<i>n</i> = 1) होगा और उनका LCM उनका गुणनफल (<i>m</i> = <i>pqr</i>) होगा। अतः, <i>mn</i> = <i>pqr</i>। कथन (II) सत्य है।<br>- कथन (I) में, यदि वे प्रत्येक अभाज्य संख्या हैं, तो वे सह-अभाज्य युग्म भी होंगे, जिससे (I) भी सत्य है।<br>अतः, दोनों कथन I और II सही हैं।",
+        exp_or: "ଉଭୟ କଥନକୁ ବିଶ୍ଳେଷଣ କଲେ:<br>- କଥନ (II) ରେ, ଯଦି <i>p</i>, <i>q</i>, <i>r</i> ପରସ୍ପର ସହ-ମୌଳିକ (pairwise coprime) ଅଟନ୍ତି, ତେବେ ସେମାନଙ୍କର ଗ.ସା.ଗୁ. 1 (<i>n</i> = 1) ହେବ ଏବଂ ଲ.ସା.ଗୁ. ସେମାନଙ୍କର ଗୁଣଫଳ (<i>m</i> = <i>pqr</i>) ହେବ । ତେଣୁ, <i>mn</i> = <i>pqr</i> । କଥନ (II) ସଠିକ୍ ।<br>- କଥନ (I) ରେ, ଯଦି <i>p</i>, <i>q</i>, <i>r</i> ପ୍ରତ୍ୟେକଟି ମୌଳିକ ସଂଖ୍ୟା ହୁଏ, ତେବେ ସେମାନେ ପରସ୍ପର ମଧ୍ୟ ସହ-ମୌଳିକ ହେବେ, ତେଣୁ (I) ମଧ୍ୟ ସଠିକ୍ ।<br>ଅତଏବ, ଉଭୟ I ଏବଂ II କଥନ ସଠିକ୍ ଅଟେ ।"
+      },
+      {
+        id: 19,
+        en: "If HCF of <i>m</i> and <i>n</i> is 1, then what are the HCF of <i>m</i> + <i>n</i>, <i>m</i> and HCF of <i>m</i> - <i>n</i>, <i>m</i> respectively? (<i>m</i> > <i>n</i>)",
+        hi: "यदि <i>m</i> और <i>n</i> का महत्तम समापवर्तक (HCF) 1 है, तो <i>m</i> + <i>n</i>, <i>m</i> का HCF और <i>m</i> - <i>n</i>, <i>m</i> का HCF क्रमशः क्या है? (<i>m</i> > <i>n</i>)",
+        or: "ଯଦି <i>m</i> ଏବଂ <i>n</i> ର ଗ.ସା.ଗୁ. (HCF) 1 ହୁଏ, ତେବେ <i>m</i> + <i>n</i>, <i>m</i> ର ଗ.ସା.ଗୁ. ଏବଂ <i>m</i> - <i>n</i>, <i>m</i> ର ଗ.ସା.ଗୁ. ଯଥାକ୍ରମେ କେତେ ହେବ? (<i>m</i> > <i>n</i>)",
+        options: {
+          en: ["1 and 2", "2 and 1", "1 and 1", "Cannot be determined"],
+          hi: ["1 and 2", "2 and 1", "1 and 1", "Cannot be determined"],
+          or: ["1 and 2", "2 and 1", "1 and 1", "Cannot be determined"]
+        },
+        correctIndex: 2, // Option 'c'
+        exp_en: "Let HCF(<i>m</i>, <i>n</i>) = 1.<br>Let <i>d</i> = HCF(<i>m</i> + <i>n</i>, <i>m</i>). Then <i>d</i> must divide <i>m</i> and <i>m</i> + <i>n</i>.<br>Since <i>d</i> divides both, it must divide their difference: (<i>m</i> + <i>n</i>) - <i>m</i> = <i>n</i>.<br>Thus, <i>d</i> divides both <i>m</i> and <i>n</i>. Since HCF(<i>m</i>, <i>n</i>) = 1, <i>d</i> must be 1.<br>Similarly, let <i>g</i> = HCF(<i>m</i> - <i>n</i>, <i>m</i>). Then <i>g</i> divides <i>m</i> and <i>m</i> - <i>n</i>.<br>Hence, <i>g</i> must divide <i>m</i> - (<i>m</i> - <i>n</i>) = <i>n</i>.<br>Since HCF(<i>m</i>, <i>n</i>) = 1, <i>g</i> must be 1.<br>Therefore, both HCFs are 1, i.e., <b>1 and 1</b>.",
+        exp_hi: "मान लीजिए HCF(<i>m</i>, <i>n</i>) = 1 है।<br>यदि <i>d</i> = HCF(<i>m</i> + <i>n</i>, <i>m</i>) है, तो <i>d</i> संख्या <i>m</i> और <i>m</i> + <i>n</i> दोनों को विभाजित करेगा।<br>अतः <i>d</i> उनके अंतर को भी विभाजित करेगा: (<i>m</i> + <i>n</i>) - <i>m</i> = <i>n</i>।<br>चूंकि HCF(<i>m</i>, <i>n</i>) = 1 है, इसलिए <i>d</i> = 1 होना चाहिए।<br>इसी प्रकार, HCF(<i>m</i> - <i>n</i>, <i>m</i>) = 1 होगा।<br>अतः दोनों का मान <b>1 और 1</b> है।",
+        exp_or: "ମନେକରନ୍ତୁ ଗ.ସା.ଗୁ.(<i>m</i>, <i>n</i>) = 1 ।<br>ଧରନ୍ତୁ <i>d</i> = HCF(<i>m</i> + <i>n</i>, <i>m</i>) । ତେଣୁ <i>d</i>, <i>m</i> ଏବଂ <i>m</i> + <i>n</i> କୁ ଭାଗ କରେ ।<br>ସେମାନଙ୍କର ବିୟୋଗଫଳ: (<i>m</i> + <i>n</i>) - <i>m</i> = <i>n</i> କୁ ମଧ୍ୟ <i>d</i> ଭାଗ କରିବ ।<br>ଯେହେତୁ ଗ.ସା.ଗୁ.(<i>m</i>, <i>n</i>) = 1, ତେଣୁ <i>d</i> = 1 ହେବ ।<br>ସେହିପରି HCF(<i>m</i> - <i>n</i>, <i>m</i>) = 1 ହେବ ।<br>ଅତଏବ, ଉଭୟ ର ମାନ ହେଉଛି <b>1 ଏବଂ 1</b> ।"
+      },
+      {
+        id: 20,
+        en: "LCM of two numbers is 16 times their HCF. The sum of LCM and HCF is 850. If one number is 50, then what is the other number?",
+        hi: "दो संख्याओं का ल.स.प. (LCM) उनके म.स.प. (HCF) का 16 गुना है। उनके ल.स.प. (LCM) और म.स.प. (HCF) का योग 850 है। यदि एक संख्या 50 है तो दूसरी संख्या क्या होगी?",
+        or: "ଦୁଇଟି ସଂଖ୍ୟାର ଲ.ସା.ଗୁ. (LCM) ସେମାନଙ୍କର ଗ.ସା.ଗୁ. (HCF) ର 16 ଗୁଣ ଅଟେ । ଲ.ସା.ଗୁ. ଏବଂ ଗ.ସା.ଗୁ. ର ଯୋଗଫଳ 850 ଅଟେ । ଯଦି ଗୋଟିଏ ସଂଖ୍ୟା 50 ହୁଏ, ତେବେ ଅନ୍ୟ ସଂଖ୍ୟାଟି କେତେ?",
+        options: {
+          en: ["800", "1200", "1600", "2400"],
+          hi: ["800", "1200", "1600", "2400"],
+          or: ["800", "1200", "1600", "2400"]
+        },
+        correctIndex: 0, // Option 'a'
+        exp_en: "Let HCF = <i>H</i> and LCM = <i>L</i>.<br>We are given:<br>1) <i>L</i> = 16<i>H</i><br>2) <i>L</i> + <i>H</i> = 850<br>Substitute (1) in (2): 16<i>H</i> + <i>H</i> = 850 ⇒ 17<i>H</i> = 850 ⇒ <i>H</i> = 50.<br>Then LCM = 16 × 50 = 800.<br>We know: Product of two numbers = HCF × LCM<br>⇒ 50 × <i>Second Number</i> = 50 × 800<br>⇒ <i>Second Number</i> = 800.",
+        exp_hi: "मान लीजिए HCF = <i>H</i> और LCM = <i>L</i> है।<br>दिया गया है: <i>L</i> = 16<i>H</i> और <i>L</i> + <i>H</i> = 850।<br>⇒ 16<i>H</i> + <i>H</i> = 850 ⇒ 17<i>H</i> = 850 ⇒ <i>H</i> = 50।<br>तो LCM = 16 × 50 = 800।<br>संख्याओं का गुणनफल = HCF × LCM ⇒ 50 × <i>दूसरी संख्या</i> = 50 × 800 ⇒ <i>दूसरी संख्या</i> = 800।",
+        exp_or: "ମନେକରନ୍ତୁ ଗ.ସା.ଗୁ. = <i>H</i> ଏବଂ ଲ.ସା.ଗୁ. = <i>L</i> ।<br>ପ୍ରଦତ୍ତ: <i>L</i> = 16<i>H</i> ଏବଂ <i>L</i> + <i>H</i> = 850 ।<br>⇒ 16<i>H</i> + <i>H</i> = 850 ⇒ 17<i>H</i> = 850 ⇒ <i>H</i> = 50 ।<br>ତେଣୁ ଲ.ସା.ଗୁ. = 16 × 50 = 800 ।<br>ସଂଖ୍ୟାଦ୍ଵୟର ଗୁଣଫଳ = HCF × LCM ⇒ 50 × <i>ଅନ୍ୟ ସଂଖ୍ୟା</i> = 50 × 800 ⇒ <i>ଅନ୍ୟ ସଂଖ୍ୟା</i> = 800 ।"
+      },
+      {
+        id: 21,
+        en: "5 bells start tolling together and toll at intervals of 2, 4, 6, 8 and 10 seconds respectively. How many times do the five bells toll together in 20 minutes?",
+        hi: "5 घंटियां एक साथ बजने लगती हैं और क्रमशः 2, 4, 6, 8 और 10 सैकेंड के अंतराल पर बजती हैं। पांच घंटियां एक साथ 20 मिनट में कितनी बार बजती हैं?",
+        or: "5 ଟି ଘଣ୍ଟା ଏකାଠି ବାଜିବା ଆରମ୍ଭ କରନ୍ତି ଏବଂ ଯଥାକ୍ରମେ 2, 4, 6, 8 ଏବଂ 10 ସେକେଣ୍ଡ ବ୍ୟବଧାନରେ ବାଜନ୍ତି । 20 ମିନିଟ୍ ମଧ୍ୟରେ 5 ଟି ଯାକ ଘଣ୍ଟା ଏකାଠି କେତେଥର ବାଜିବେ?",
+        options: {
+          en: ["10", "11", "12", "15"],
+          hi: ["10", "11", "12", "15"],
+          or: ["10", "11", "12", "15"]
+        },
+        correctIndex: 1, // Option 'b'
+        exp_en: "The bells toll together at intervals equal to the LCM of 2, 4, 6, 8, and 10.<br>LCM(2, 4, 6, 8, 10) = 120 seconds = 2 minutes.<br>In 20 minutes, the bells will toll together:<br>Number of tolls = (Total time / Interval) + 1 (including the initial toll at start)<br>⇒ (20 / 2) + 1 = 10 + 1 = 11 times.",
+        exp_hi: "घंटियां एक साथ बजने के अंतराल का ल.स.प. (LCM) ज्ञात करते हैं:<br>LCM(2, 4, 6, 8, 10) = 120 सेकंड = 2 मिनट।<br>20 मिनट में घंटियाँ एक साथ बजेंगी:<br>बजने की संख्या = (कुल समय / अंतराल) + 1 (प्रारंभिक बजने को शामिल करते हुए)<br>⇒ (20 / 2) + 1 = 10 + 1 = 11 बार।",
+        exp_or: "ଘଣ୍ଟାଗୁଡ଼ିକ ଏକାଠି ବାଜିବା ସମୟ ବ୍ୟବଧାନର ଲ.ସା.ଗୁ. = LCM(2, 4, 6, 8, 10) = 120 ସେକେଣ୍ଡ = 2 ମିନିଟ୍ ।<br>20 ମିନିଟ୍ ମଧ୍ୟରେ ଘଣ୍ଟାଗୁଡ଼ିକ ଏକାଠି ବାଜିବେ:<br>ବାଜିବା ସଂଖ୍ୟା = (ମୋଟ ସମୟ / ବ୍ୟବଧାନ) + 1 (ଆରମ୍ଭର ପ୍ରଥମ ବଜାକୁ ମିଶାଇ)<br>⇒ (20 / 2) + 1 = 10 + 1 = 11 ଥର ।"
+      },
+      {
+        id: 22,
+        en: "A person has four iron bars whose lengths are 24 m, 36 m, 48 m and 72 m respectively. This person wants to cut pieces of same length from each of four bars. What is the least number of total pieces if he is to cut without any wastage?",
+        hi: "एक व्यक्ति के पास चार लोहे की छड़े हैं जिनकी लंबाई क्रमशः 24 मीटर, 36 मीटर, 48 मीटर और 72 मीटर है। यह व्यक्ति चार छड़ो में से प्रत्येक से समान लंबाई के टुकड़े काटना चाहता है, यदि उसे बिना किसी अपव्यय के काटना है तो कुल टुकड़ों की न्यूनतम संख्या क्या है?",
+        or: "ଜଣେ ବ୍ୟକ୍ତିଙ୍କ ପାଖରେ ଯଥାକ୍ରମେ 24 ମିଟର, 36 ମିଟର, 48 ମିଟର ଏବଂ 72 ମିଟର ଲମ୍ବର ଚାରୋଟି ଲୁହା ରଡ୍ ଅଛି । ସେ ଏହି ରଡ୍‌ ଗୁଡ଼ିକୁ ବିନା କୌଣସି ଅପଚୟରେ ସମାନ ଲମ୍ବର ଖଣ୍ଡରେ କାଟିବାକୁ ଚାହାଁନ୍ତି । ସର୍ବନିମ୍ନ ମୋଟ କେତୋଟି ଖଣ୍ଡ ମିଳିପାରିବ?",
+        options: {
+          en: ["10", "15", "20", "25"],
+          hi: ["10", "15", "20", "25"],
+          or: ["10", "15", "20", "25"]
+        },
+        correctIndex: 1, // Option 'b'
+        exp_en: "To get the least number of pieces, the length of each cut piece must be maximized.<br>Maximum length of each piece = HCF of 24, 36, 48, and 72.<br>HCF(24, 36, 48, 72) = 12 meters.<br>Number of pieces from each bar:<br>- 24m bar: 24 / 12 = 2 pieces<br>- 36m bar: 36 / 12 = 3 pieces<br>- 48m bar: 48 / 12 = 4 pieces<br>- 72m bar: 72 / 12 = 6 pieces<br>Total pieces = 2 + 3 + 4 + 6 = 15.",
+        exp_hi: "टुकड़ों की संख्या न्यूनतम करने के लिए प्रत्येक टुकड़े की लंबाई को अधिकतम (HCF) होना चाहिए।<br>अधिकतम लंबाई = HCF(24, 36, 48, 72) = 12 मीटर।<br>प्रत्येक छड़ से प्राप्त टुकड़े:<br>- 24m से: 2 टुकड़े, 36m से: 3 टुकड़े, 48m से: 4 टुकड़े, 72m से: 6 टुकड़े।<br>कुल टुकड़े = 2 + 3 + 4 + 6 = 15।",
+        exp_or: "ଖଣ୍ଡ ସଂଖ୍ୟା ସର୍ବନିମ୍ନ କରିବା ପାଇଁ ପ୍ରତ୍ୟେକ ଖଣ୍ଡର ଲମ୍ବ ସର୍ବାଧିକ (ଗ.ସା.ଗୁ.) ହେବା ଆବଶ୍ୟକ ।<br>ସର୍ବାଧିକ ଲମ୍ବ = HCF(24, 36, 48, 72) = 12 ମିଟର ।<br>ପ୍ରତ୍ୟେକ ରଡ୍ ରୁ ଖଣ୍ଡ ସଂଖ୍ୟା:<br>- 24m ରୁ: 2 ଖଣ୍ଡ, 36m ରୁ: 3 ଖଣ୍ଡ, 48m ରୁ: 4 ଖଣ୍ଡ, 72m ରୁ: 6 ଖଣ୍ଡ ।<br>ମୋଟ ଖଣ୍ଡ = 2 + 3 + 4 + 6 = 15 ।"
+      },
+      {
+        id: 23,
+        en: "If the HCF of <i>x</i><sup>3</sup> + <i>mx</i><sup>2</sup> - <i>x</i> + 2<i>m</i> and <i>x</i><sup>2</sup> + <i>mx</i> - 2 is a linear polynomial, then what is the value of m?",
+        hi: "यदि <i>x</i><sup>3</sup> + <i>mx</i><sup>2</sup> - <i>x</i> + 2<i>m</i> और <i>x</i><sup>2</sup> + <i>mx</i> - 2 का महत्तम समापवर्तक (HCF) एक रैखिक बहुपद है, तो m का मान क्या है?",
+        or: "ଯଦି <i>x</i><sup>3</sup> + <i>mx</i><sup>2</sup> - <i>x</i> + 2<i>m</i> ଏବଂ <i>x</i><sup>2</sup> + <i>mx</i> - 2 ର ଗ.ସା.ଗୁ. (HCF) ଏକ ରୈଖିକ ବହୁପଦୀ (linear polynomial) ହୁଏ, ତେବେ m ର ମାନ କେତେ?",
+        options: {
+          en: ["1", "2", "3", "4"],
+          hi: ["1", "2", "3", "4"],
+          or: ["1", "2", "3", "4"]
+        },
+        correctIndex: 0, // Option 'a'
+        exp_en: "Let (<i>x</i> - <i>r</i>) be the linear HCF factor, which means <i>r</i> is a common root of both polynomials.<br>1. Since <i>r</i> is a root of the second polynomial: <i>r</i><sup>2</sup> + <i>mr</i> - 2 = 0 ⇒ <i>mr</i> = 2 - <i>r</i><sup>2</sup><br>2. Since <i>r</i> is a root of the first polynomial: <i>r</i><sup>3</sup> + <i>mr</i><sup>2</sup> - <i>r</i> + 2<i>m</i> = 0<br>⇒ <i>r</i><sup>3</sup> + (<i>mr</i>)<i>r</i> - <i>r</i> + 2<i>m</i> = 0<br>Substitute <i>mr</i> = 2 - <i>r</i><sup>2</sup> into this expression:<br>⇒ <i>r</i><sup>3</sup> + (2 - <i>r</i><sup>2</sup>)<i>r</i> - <i>r</i> + 2<i>m</i> = 0<br>⇒ <i>r</i><sup>3</sup> + 2<i>r</i> - <i>r</i><sup>3</sup> - <i>r</i> + 2<i>m</i> = 0<br>⇒ <i>r</i> + 2<i>m</i> = 0 ⇒ <i>r</i> = -2<i>m</i>.<br>Substitute <i>r</i> = -2<i>m</i> back into the second polynomial:<br>(-2<i>m</i>)<sup>2</sup> + <i>m</i>(-2<i>m</i>) - 2 = 0<br>⇒ 4<i>m</i><sup>2</sup> - 2<i>m</i><sup>2</sup> - 2 = 0 ⇒ 2<i>m</i><sup>2</sup> = 2 ⇒ <i>m</i><sup>2</sup> = 1 ⇒ <i>m</i> = ±1.<br>From the given options, the value is <b>1</b>.",
+        exp_hi: "मान लीजिए कि उभयनिष्ठ रैखिक गुणनखंड (<i>x</i> - <i>r</i>) है, अर्थात <i>r</i> दोनों बहुपदों का एक साझा मूल है।<br>1. द्विघात बहुपद से: <i>r</i><sup>2</sup> + <i>mr</i> - 2 = 0 ⇒ <i>mr</i> = 2 - <i>r</i><sup>2</sup><br>2. प्रथम बहुपद से: <i>r</i><sup>3</sup> + <i>mr</i><sup>2</sup> - <i>r</i> + 2<i>m</i> = 0<br>⇒ <i>r</i><sup>3</sup> + (<i>mr</i>)<i>r</i> - <i>r</i> + 2<i>m</i> = 0<br><i>mr</i> = 2 - <i>r</i><sup>2</sup> रखने पर:<br>⇒ <i>r</i><sup>3</sup> + (2 - <i>r</i><sup>2</sup>)<i>r</i> - <i>r</i> + 2<i>m</i> = 0 ⇒ <i>r</i> + 2<i>m</i> = 0 ⇒ <i>r</i> = -2<i>m</i>।<br><i>r</i> = -2<i>m</i> को समीकरण (1) में रखने पर: 4<i>m</i><sup>2</sup> - 2<i>m</i><sup>2</sup> - 2 = 0 ⇒ 2<i>m</i><sup>2</sup> = 2 ⇒ <i>m</i> = 1।",
+        exp_or: "ଧରନ୍ତୁ ରୈଖିକ ଉତ୍ପାଦକ ହେଉଛି (<i>x</i> - <i>r</i>), ଯାହାର ଅର୍ଥ <i>r</i> ହେଉଛି ଦୁଇଟିଯାକ ବହୁପଦୀର ଏକ ସାଧାରଣ ମୂଳ (root) ।<br>1. ଦ୍ଵିତୀୟ ବହୁପଦୀ ଅନୁଯାୟୀ: <i>r</i><sup>2</sup> + <i>mr</i> - 2 = 0 ⇒ <i>mr</i> = 2 - <i>r</i><sup>2</sup><br>2. ପ୍ରଥମ ବହୁପଦୀ ଅନୁଯାୟୀ: <i>r</i><sup>3</sup> + <i>mr</i><sup>2</sup> - <i>r</i> + 2<i>m</i> = 0<br>⇒ <i>r</i><sup>3</sup> + (<i>mr</i>)<i>r</i> - <i>r</i> + 2<i>m</i> = 0<br><i>mr</i> = 2 - <i>r</i><sup>2</sup> ର ମାନ ପ୍ରତିସ୍ଥାପନ କଲେ ପାଇବା:<br>⇒ <i>r</i><sup>3</sup> + (2 - <i>r</i><sup>2</sup>)<i>r</i> - <i>r</i> + 2<i>m</i> = 0 ⇒ <i>r</i> + 2<i>m</i> = 0 ⇒ <i>r</i> = -2<i>m</i> ।<br><i>r</i> = -2<i>m</i> ର ମାନ ଦ୍ଵିତୀୟ ବହୁପଦୀରେ ପ୍ରତିସ୍ଥାପନ କଲେ: 4<i>m</i><sup>2</sup> - 2<i>m</i><sup>2</sup> - 2 = 0 ⇒ 2<i>m</i><sup>2</sup> = 2 ⇒ <i>m</i> = 1 ।"
+      },
+      {
+        id: 24,
+        en: "If (<i>x</i> + <i>k</i>) is the HCF of (<i>x</i><sup>2</sup> + <i>ax</i> + <i>b</i>) and (<i>x</i><sup>2</sup> + <i>cx</i> + <i>d</i>), then what is the value of k?",
+        hi: "यदि (<i>x</i> + <i>k</i>) (<i>x</i><sup>2</sup> + <i>ax</i> + <i>b</i>) और (<i>x</i><sup>2</sup> + <i>cx</i> + <i>d</i>) का महत्तम समापवर्तक (HCF) है, तो k का मान क्या है?",
+        or: "ଯଦି (<i>x</i> + <i>k</i>) ହେଉଛି (<i>x</i><sup>2</sup> + <i>ax</i> + <i>b</i>) ଏବଂ (<i>x</i><sup>2</sup> + <i>cx</i> + <i>d</i>) ର ଗ.ସା.ଗୁ. (HCF), ତେବେ k ର ମାନ କେତେ?",
+        options: {
+          en: [
+            `<div class="fraction"><span class="numerator"><i>b</i> + <i>d</i></span><span class="denominator"><i>a</i> + <i>c</i></span></div>`,
+            `<div class="fraction"><span class="numerator"><i>b</i> + <i>d</i></span><span class="denominator"><i>c</i> + <i>d</i></span></div>`,
+            `<div class="fraction"><span class="numerator"><i>a</i> - <i>b</i></span><span class="denominator"><i>c</i> - <i>d</i></span></div>`,
+            `<div class="fraction"><span class="numerator"><i>b</i> - <i>d</i></span><span class="denominator"><i>a</i> - <i>c</i></span></div>`
+          ],
+          hi: [
+            `<div class="fraction"><span class="numerator"><i>b</i> + <i>d</i></span><span class="denominator"><i>a</i> + <i>c</i></span></div>`,
+            `<div class="fraction"><span class="numerator"><i>b</i> + <i>d</i></span><span class="denominator"><i>c</i> + <i>d</i></span></div>`,
+            `<div class="fraction"><span class="numerator"><i>a</i> - <i>b</i></span><span class="denominator"><i>c</i> - <i>d</i></span></div>`,
+            `<div class="fraction"><span class="numerator"><i>b</i> - <i>d</i></span><span class="denominator"><i>a</i> - <i>c</i></span></div>`
+          ],
+          or: [
+            `<div class="fraction"><span class="numerator"><i>b</i> + <i>d</i></span><span class="denominator"><i>a</i> + <i>c</i></span></div>`,
+            `<div class="fraction"><span class="numerator"><i>b</i> + <i>d</i></span><span class="denominator"><i>c</i> + <i>d</i></span></div>`,
+            `<div class="fraction"><span class="numerator"><i>a</i> - <i>b</i></span><span class="denominator"><i>c</i> - <i>d</i></span></div>`,
+            `<div class="fraction"><span class="numerator"><i>b</i> - <i>d</i></span><span class="denominator"><i>a</i> - <i>c</i></span></div>`
+          ]
+        },
+        correctIndex: 3, // Option 'd'
+        exp_en: "Since (<i>x</i> + <i>k</i>) is the HCF, <i>x</i> = -<i>k</i> is a common root of both polynomials.<br>Substituting <i>x</i> = -<i>k</i> in both:<br>1) (-<i>k</i>)<sup>2</sup> + <i>a</i>(-<i>k</i>) + <i>b</i> = 0 ⇒ <i>k</i><sup>2</sup> - <i>ak</i> + <i>b</i> = 0<br>2) (-<i>k</i>)<sup>2</sup> + <i>c</i>(-<i>k</i>) + <i>d</i> = 0 ⇒ <i>k</i><sup>2</sup> - <i>ck</i> + <i>d</i> = 0<br>Subtracting (2) from (1):<br>(<i>k</i><sup>2</sup> - <i>ak</i> + <i>b</i>) - (<i>k</i><sup>2</sup> - <i>ck</i> + <i>d</i>) = 0<br>⇒ (<i>c</i> - <i>a</i>)<i>k</i> + <i>b</i> - <i>d</i> = 0<br>⇒ (<i>a</i> - <i>c</i>)<i>k</i> = <i>b</i> - <i>d</i><br>⇒ <i>k</i> = (<i>b</i> - <i>d</i>) / (<i>a</i> - <i>c</i>).",
+        exp_hi: "चूंकि (<i>x</i> + <i>k</i>) महत्तम समापवर्तक है, इसलिए <i>x</i> = -<i>k</i> दोनों बहुपदों का एक साझा मूल है।<br><i>x</i> = -<i>k</i> प्रतिस्थापित करने पर:<br>1) <i>k</i><sup>2</sup> - <i>ak</i> + <i>b</i> = 0<br>2) <i>k</i><sup>2</sup> - <i>ck</i> + <i>d</i> = 0<br>समीकरण (1) से (2) को घटाने पर:<br>(<i>c</i> - <i>a</i>)<i>k</i> + <i>b</i> - <i>d</i> = 0 ⇒ (<i>a</i> - <i>c</i>)<i>k</i> = <i>b</i> - <i>d</i> ⇒ <i>k</i> = (<i>b</i> - <i>d</i>) / (<i>a</i> - <i>c</i>)।",
+        exp_or: "ଯେହେତୁ (<i>x</i> + <i>k</i>) ଗ.ସା.ଗୁ. ଅଟେ, ତେଣୁ <i>x</i> = -<i>k</i> ଉଭୟ ବହୁପଦୀର ଏକ ସାଧାରଣ ମୂଳ ହେବ ।<br><i>x</i> = -<i>k</i> ର ମାନ ପ୍ରତିସ୍ଥାପନ କଲେ:<br>1) <i>k</i><sup>2</sup> - <i>ak</i> + <i>b</i> = 0<br>2) <i>k</i><sup>2</sup> - <i>ck</i> + <i>d</i> = 0<br>ସମୀକରଣ (1) ରୁ (2) କୁ ବିୟୋଗ କଲେ:<br>(<i>c</i> - <i>a</i>)<i>k</i> + <i>b</i> - <i>d</i> = 0 ⇒ (<i>a</i> - <i>c</i>)<i>k</i> = <i>b</i> - <i>d</i> ⇒ <i>k</i> = (<i>b</i> - <i>d</i>) / (<i>a</i> - <i>c</i>) ।"
+      },
+      {
+        id: 25,
+        en: "What is the HCF of <i>x</i><sup>3</sup> + 3<i>x</i><sup>2</sup><i>y</i> + 2<i>xy</i><sup>2</sup> and <i>x</i><sup>4</sup> + 6<i>x</i><sup>3</sup><i>y</i> + 8<i>x</i><sup>2</sup><i>y</i><sup>2</sup>.",
+        hi: "<i>x</i><sup>3</sup> + 3<i>x</i><sup>2</sup><i>y</i> + 2<i>xy</i><sup>2</sup> और <i>x</i><sup>4</sup> + 6<i>x</i><sup>3</sup><i>y</i> + 8<i>x</i><sup>2</sup><i>y</i><sup>2</sup> का महत्तम समापवर्तक (HCF) ज्ञात कीजिए ?",
+        or: "<i>x</i><sup>3</sup> + 3<i>x</i><sup>2</sup><i>y</i> + 2<i>xy</i><sup>2</sup> ଏବଂ <i>x</i><sup>4</sup> + 6<i>x</i><sup>3</sup><i>y</i> + 8<i>x</i><sup>2</sup><i>y</i><sup>2</sup> ର ଗ.ସା.ଗୁ. (HCF) କେତେ?",
+        options: {
+          en: ["<i>x</i>(<i>x</i> + 2<i>y</i>)", "<i>x</i>(<i>x</i> + 3<i>y</i>)", "<i>x</i> + 2<i>y</i>", "None of these"],
+          hi: ["<i>x</i>(<i>x</i> + 2<i>y</i>)", "<i>x</i>(<i>x</i> + 3<i>y</i>)", "<i>x</i> + 2<i>y</i>", "None of these"],
+          or: ["<i>x</i>(<i>x</i> + 2<i>y</i>)", "<i>x</i>(<i>x</i> + 3<i>y</i>)", "<i>x</i> + 2<i>y</i>", "None of these"]
+        },
+        correctIndex: 0, // Option 'a'
+        exp_en: "Let's factorize both expressions:<br>1. <i>x</i><sup>3</sup> + 3<i>x</i><sup>2</sup><i>y</i> + 2<i>xy</i><sup>2</sup> = <i>x</i>(<i>x</i><sup>2</sup> + 3<i>xy</i> + 2<i>y</i><sup>2</sup>) = <i>x</i>(<i>x</i> + <i>y</i>)(<i>x</i> + 2<i>y</i>)<br>2. <i>x</i><sup>4</sup> + 6<i>x</i><sup>3</sup><i>y</i> + 8<i>x</i><sup>2</sup><i>y</i><sup>2</sup> = <i>x</i><sup>2</sup>(<i>x</i><sup>2</sup> + 6<i>xy</i> + 8<i>y</i><sup>2</sup>) = <i>x</i><sup>2</sup>(<i>x</i> + 2<i>y</i>)(<i>x</i> + 4<i>y</i>)<br>The common factors in both factorized expressions are <i>x</i> and (<i>x</i> + 2<i>y</i>).<br>Therefore, HCF = <b><i>x</i>(<i>x</i> + 2<i>y</i>)</b>.",
+        exp_hi: "दोनों व्यंजकों का गुणनखंड करते हैं:<br>1. <i>x</i><sup>3</sup> + 3<i>x</i><sup>2</sup><i>y</i> + 2<i>xy</i><sup>2</sup> = <i>x</i>(<i>x</i><sup>2</sup> + 3<i>xy</i> + 2<i>y</i><sup>2</sup>) = <i>x</i>(<i>x</i> + <i>y</i>)(<i>x</i> + 2<i>y</i>)<br>2. <i>x</i><sup>4</sup> + 6<i>x</i><sup>3</sup><i>y</i> + 8<i>x</i><sup>2</sup><i>y</i><sup>2</sup> = <i>x</i><sup>2</sup>(<i>x</i><sup>2</sup> + 6<i>xy</i> + 8<i>y</i><sup>2</sup>) = <i>x</i><sup>2</sup>(<i>x</i> + 2<i>y</i>)(<i>x</i> + 4<i>y</i>)<br>दोनों व्यंजकों में उभयनिष्ठ गुणनखंड <i>x</i> और (<i>x</i> + 2<i>y</i>) हैं।<br>अतः HCF = <b><i>x</i>(<i>x</i> + 2<i>y</i>)</b> है।",
+        exp_or: "ଉଭୟ ବହୁପଦୀର ଉତ୍ପାଦକ ବାହାର କରିବା:<br>1. <i>x</i><sup>3</sup> + 3<i>x</i><sup>2</sup><i>y</i> + 2<i>xy</i><sup>2</sup> = <i>x</i>(<i>x</i><sup>2</sup> + 3<i>xy</i> + 2<i>y</i><sup>2</sup>) = <i>x</i>(<i>x</i> + <i>y</i>)(<i>x</i> + 2<i>y</i>)<br>2. <i>x</i><sup>4</sup> + 6<i>x</i><sup>3</sup><i>y</i> + 8<i>x</i><sup>2</sup><i>y</i><sup>2</sup> = <i>x</i><sup>2</sup>(<i>x</i><sup>2</sup> + 6<i>xy</i> + 8<i>y</i><sup>2</sup>) = <i>x</i><sup>2</sup>(<i>x</i> + 2<i>y</i>)(<i>x</i> + 4<i>y</i>)<br>ଉଭୟରେ ସାଧାରଣ ଉତ୍ପାଦକଗୁଡ଼ିକ ହେଲା <i>x</i> ଏବଂ (<i>x</i> + 2<i>y</i>) ।<br>ଅତଏବ, ଗ.ସା.ଗୁ. = <b><i>x</i>(<i>x</i> + 2<i>y</i>)</b> ।"
+      }
+    ];
+
+    // --- STATE VARIABLES ---
+    let currentLanguage = 'en';
+    let currentQuestionIdx = 0;
+    let userAnswers = Array(25).fill(null); // stores selected option indices (0-3)
+    let questionStatus = Array(25).fill('unattempted'); // 'unattempted', 'attempted', 'reviewed'
+    
+    // Timer Variables
+    let totalTimeSec = 20 * 60; // 20 minutes
+    let timeRemainingSec = totalTimeSec;
+    let timerInterval = null;
+    
+    // Audio Context Variables (Offline Web Audio Synth)
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let musicNodes = [];
+    let musicTimeout = null;
+
+    // --- LANGUAGE MANAGEMENT ---
+    function setLanguage(lang) {
+      currentLanguage = lang;
+      
+      // Update top header language tabs state
+      const tabs = document.querySelectorAll('.lang-tab');
+      const langMap = { 'en': 0, 'hi': 1, 'or': 2 };
+      tabs.forEach((tab, index) => {
+        if (index === langMap[lang]) tab.classList.add('active');
+        else tab.classList.remove('active');
+      });
+
+      // Synchronize radio selection on start page
+      const radios = document.querySelectorAll('input[name="start-lang"]');
+      radios.forEach(radio => {
+        if (radio.value === lang) radio.checked = true;
+      });
+
+      // Rerender question if currently in test page
+      if (document.getElementById('test-page').classList.contains('active')) {
+        renderQuestion();
+      }
+    }
+
+    // --- TEST NAVIGATION AND PALETTE ---
+    function startTest() {
+      // Transition pages
+      document.getElementById('start-page').classList.remove('active');
+      document.getElementById('test-page').classList.add('active');
+      document.getElementById('header-lang-tabs').style.display = 'flex';
+
+      // Setup palette grid
+      const paletteGrid = document.getElementById('palette-grid-el');
+      paletteGrid.innerHTML = '';
+      for (let i = 0; i < 25; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'palette-btn unattempted';
+        btn.id = `palette-btn-${i}`;
+        btn.textContent = i + 1;
+        btn.onclick = () => jumpToQuestion(i);
+        paletteGrid.appendChild(btn);
+      }
+
+      // Initialize test state
+      currentQuestionIdx = 0;
+      userAnswers = Array(25).fill(null);
+      questionStatus = Array(25).fill('unattempted');
+      timeRemainingSec = totalTimeSec;
+
+      renderQuestion();
+      startTimer();
+    }
+
+    function renderQuestion() {
+      const qData = questionsData[currentQuestionIdx];
+      
+      // Update Question Number and Marks
+      document.getElementById('question-num-title').textContent = `Question ${currentQuestionIdx + 1} of 25`;
+      
+      // Update Question Text (HTML supported for superscripts and subscripts)
+      document.getElementById('question-text').innerHTML = qData[currentLanguage];
+
+      // Update Option Selection Radio Cards
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+
+      const letters = ['A', 'B', 'C', 'D'];
+      const currentOptions = qData.options[currentLanguage];
+
+      currentOptions.forEach((optionText, idx) => {
+        const card = document.createElement('div');
+        card.className = `option-card ${userAnswers[currentQuestionIdx] === idx ? 'selected' : ''}`;
+        card.onclick = () => selectOption(idx);
+
+        const bullet = document.createElement('div');
+        bullet.className = 'option-bullet';
+        bullet.textContent = letters[idx];
+
+        const content = document.createElement('div');
+        content.className = 'option-content';
+        content.innerHTML = optionText;
+
+        card.appendChild(bullet);
+        card.appendChild(content);
+        optionsContainer.appendChild(card);
+      });
+
+      // Update Palette Current State
+      for (let i = 0; i < 25; i++) {
+        const btn = document.getElementById(`palette-btn-${i}`);
+        btn.className = `palette-btn ${questionStatus[i]}`;
+        if (i === currentQuestionIdx) {
+          btn.classList.add('current');
+        }
+      }
+    }
+
+    function selectOption(optionIndex) {
+      userAnswers[currentQuestionIdx] = optionIndex;
+      if (questionStatus[currentQuestionIdx] !== 'reviewed') {
+        questionStatus[currentQuestionIdx] = 'attempted';
+      }
+      renderQuestion();
+    }
+
+    function clearResponse() {
+      userAnswers[currentQuestionIdx] = null;
+      questionStatus[currentQuestionIdx] = 'unattempted';
+      renderQuestion();
+    }
+
+    function markForReview() {
+      questionStatus[currentQuestionIdx] = 'reviewed';
+      nextQuestion();
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIdx > 0) {
+        currentQuestionIdx--;
+        renderQuestion();
+      }
+    }
+
+    function nextQuestion() {
+      // If answered and status was unattempted, make it attempted
+      if (userAnswers[currentQuestionIdx] !== null && questionStatus[currentQuestionIdx] === 'unattempted') {
+        questionStatus[currentQuestionIdx] = 'attempted';
+      }
+      
+      if (currentQuestionIdx < 24) {
+        currentQuestionIdx++;
+        renderQuestion();
+      }
+    }
+
+    function jumpToQuestion(idx) {
+      // If user had answered current question, mark it attempted before leaving
+      if (userAnswers[currentQuestionIdx] !== null && questionStatus[currentQuestionIdx] === 'unattempted') {
+        questionStatus[currentQuestionIdx] = 'attempted';
+      }
+      currentQuestionIdx = idx;
+      renderQuestion();
+    }
+
+    // --- TIMER SYSTEM ---
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      
+      const timerText = document.getElementById('timer-text');
+      const progressBar = document.getElementById('progress-bar-el');
+
+      timerInterval = setInterval(() => {
+        timeRemainingSec--;
+        
+        // Formulate minutes and seconds
+        const mins = Math.floor(timeRemainingSec / 60);
+        const secs = timeRemainingSec % 60;
+        timerText.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+        // Warn class when under 2 minutes
+        if (timeRemainingSec <= 120) {
+          timerText.classList.add('warn');
+        } else {
+          timerText.classList.remove('warn');
+        }
+
+        // Progress bar percentage
+        const percentElapsed = ((totalTimeSec - timeRemainingSec) / totalTimeSec) * 100;
+        progressBar.style.width = `${percentElapsed}%`;
+
+        // Time Out Check
+        if (timeRemainingSec <= 0) {
+          clearInterval(timerInterval);
+          submitTest(true); // Forced submission
+        }
+      }, 1000);
+    }
+
+    // --- SCORE & SUBMIT SYSTEM ---
+    function confirmSubmit() {
+      const attemptedCount = userAnswers.filter(ans => ans !== null).length;
+      const confirmMsg = `You have attempted ${attemptedCount} out of 25 questions.\nAre you sure you want to submit the test?`;
+      if (confirm(confirmMsg)) {
+        submitTest(false);
+      }
+    }
+
+    function submitTest(isTimeOut = false) {
+      clearInterval(timerInterval);
+      
+      if (isTimeOut) {
+        alert("Time limit reached! Your test is being automatically submitted.");
+      }
+
+      // Calculate Metrics
+      let correctCount = 0;
+      let wrongCount = 0;
+      let unattemptedCount = 0;
+
+      for (let i = 0; i < 25; i++) {
+        if (userAnswers[i] === null) {
+          unattemptedCount++;
+        } else if (userAnswers[i] === questionsData[i].correctIndex) {
+          correctCount++;
+        } else {
+          wrongCount++;
+        }
+      }
+
+      const score = (correctCount * 2) - (wrongCount * 0.5);
+      const percentage = (score / 50) * 100;
+      const timeTakenSec = totalTimeSec - timeRemainingSec;
+      const timeTakenMinStr = `${Math.floor(timeTakenSec / 60)}m ${timeTakenSec % 60}s`;
+
+      // Update Result DOM Elements
+      document.getElementById('result-score').textContent = score.toFixed(1);
+      document.getElementById('stat-correct').textContent = correctCount;
+      document.getElementById('stat-wrong').textContent = wrongCount;
+      document.getElementById('stat-unattempted').textContent = unattemptedCount;
+      document.getElementById('stat-time').textContent = timeTakenMinStr;
+
+      // Circular Score Meter animation
+      const circProgress = document.getElementById('result-circle-progress');
+      // Circumference = 2 * PI * r = 2 * 3.14159 * 80 = 502.65
+      const circumference = 502;
+      const cappedPercent = Math.max(0, Math.min(100, percentage)); // cap 0 to 100
+      const offset = circumference - (cappedPercent / 100) * circumference;
+      circProgress.style.strokeDashoffset = offset;
+
+      // Rank Messages
+      const rankBadge = document.getElementById('rank-badge-text');
+      if (percentage >= 95) {
+        rankBadge.textContent = "Excellent 🏆";
+        rankBadge.style.color = "#10b981";
+      } else if (percentage >= 80) {
+        rankBadge.textContent = "Very Good ⭐";
+        rankBadge.style.color = "#3b82f6";
+      } else if (percentage >= 60) {
+        rankBadge.textContent = "Good 👍";
+        rankBadge.style.color = "#f59e0b";
+      } else {
+        rankBadge.textContent = "Keep Practicing 💪";
+        rankBadge.style.color = "#ef4444";
+      }
+
+      // Hide test elements, show result page
+      document.getElementById('test-page').classList.remove('active');
+      document.getElementById('header-lang-tabs').style.display = 'none';
+      document.getElementById('result-page').classList.add('active');
+
+      // Trigger Confetti & Balloons
+      triggerCelebration();
+    }
+
+    function retakeTest() {
+      // Reset variables
+      userAnswers = Array(25).fill(null);
+      questionStatus = Array(25).fill('unattempted');
+      currentQuestionIdx = 0;
+      timeRemainingSec = totalTimeSec;
+
+      // Reset result score circle offset
+      document.getElementById('result-circle-progress').style.strokeDashoffset = 502;
+
+      // Reset DOM state and go to Start Page
+      document.getElementById('result-page').classList.remove('active');
+      document.getElementById('start-page').classList.add('active');
+      document.getElementById('header-lang-tabs').style.display = 'none';
+      
+      // Stop celebration animations
+      stopCelebration();
+    }
+
+    // --- DETAILED REVIEW PAGE ---
+    function showReviewPage() {
+      document.getElementById('result-page').classList.remove('active');
+      document.getElementById('review-page').classList.add('active');
+
+      const reviewList = document.getElementById('review-list-el');
+      reviewList.innerHTML = '';
+
+      const letters = ['A', 'B', 'C', 'D'];
+
+      questionsData.forEach((qData, qIdx) => {
+        const userAnsIdx = userAnswers[qIdx];
+        const correctAnsIdx = qData.correctIndex;
+        
+        let statusClass = 'unattempted';
+        let statusLabel = 'Unattempted';
+        if (userAnsIdx !== null) {
+          if (userAnsIdx === correctAnsIdx) {
+            statusClass = 'correct';
+            statusLabel = 'Correct Answer';
+          } else {
+            statusClass = 'wrong';
+            statusLabel = 'Wrong Answer';
+          }
+        }
+
+        const itemCard = document.createElement('div');
+        itemCard.className = `review-item-card ${statusClass}`;
+
+        // Status Badge
+        const statusBadge = document.createElement('div');
+        statusBadge.className = 'review-item-status';
+        statusBadge.textContent = `Q${qIdx + 1} • ${statusLabel}`;
+        itemCard.appendChild(statusBadge);
+
+        // Question content
+        const qContent = document.createElement('div');
+        qContent.className = 'review-item-question';
+        qContent.innerHTML = qData[currentLanguage];
+        itemCard.appendChild(qContent);
+
+        // Options List (Grid)
+        const optsGrid = document.createElement('div');
+        optsGrid.className = 'review-item-options';
+        
+        qData.options[currentLanguage].forEach((optText, optIdx) => {
+          const optBox = document.createElement('div');
+          optBox.className = 'review-opt-box';
+          
+          if (optIdx === correctAnsIdx) {
+            optBox.classList.add('correct-choice');
+          }
+          if (optIdx === userAnsIdx && userAnsIdx !== correctAnsIdx) {
+            optBox.classList.add('user-selected');
+          }
+
+          const bullet = document.createElement('div');
+          bullet.className = 'review-opt-bullet';
+          bullet.textContent = letters[optIdx];
+
+          const textEl = document.createElement('span');
+          textEl.innerHTML = optText;
+
+          optBox.appendChild(bullet);
+          optBox.appendChild(textEl);
+          optsGrid.appendChild(optBox);
+        });
+        itemCard.appendChild(optsGrid);
+
+        // Explanation Card
+        const expBox = document.createElement('div');
+        expBox.className = 'explanation-box';
+        
+        const expTitle = document.createElement('div');
+        expTitle.className = 'explanation-title';
+        expTitle.innerHTML = '💡 Detailed Mathematical Explanation:';
+        expBox.appendChild(expTitle);
+
+        const expContent = document.createElement('div');
+        const langExpKey = `exp_${currentLanguage}`;
+        expContent.innerHTML = qData[langExpKey];
+        expBox.appendChild(expContent);
+
+        itemCard.appendChild(expBox);
+        reviewList.appendChild(itemCard);
+      });
+    }
+
+    function goBackToResult() {
+      document.getElementById('review-page').classList.remove('active');
+      document.getElementById('result-page').classList.add('active');
+    }
+
+    // --- CELEBRATION ENGINE (CANVAS CONFETTI & BALLOONS) ---
+    let canvas = document.getElementById('animation-canvas');
+    let ctx = canvas.getContext('2d');
+    let animationFrameId = null;
+    let particles = [];
+    let balloons = [];
+
+    class ConfettiParticle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * -canvas.height;
+        this.size = Math.random() * 8 + 6;
+        this.color = `hsl(${Math.random() * 360}, 90%, 60%)`;
+        this.speedX = Math.random() * 2 - 1;
+        this.speedY = Math.random() * 3 + 2;
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = Math.random() * 4 - 2;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.rotation += this.rotationSpeed;
+        if (this.y > canvas.height) {
+          this.y = -20;
+          this.x = Math.random() * canvas.width;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.fillStyle = this.color;
+        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+        ctx.restore();
+      }
+    }
+
+    class Balloon {
+      constructor() {
+        this.reset();
+        this.y = canvas.height + Math.random() * 100; // start below screen
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + 50;
+        this.radius = Math.random() * 15 + 25;
+        this.color = `hsl(${Math.random() * 360}, 85%, 55%)`;
+        this.speedY = Math.random() * 1.5 + 1;
+        this.swaySpeed = Math.random() * 0.02 + 0.01;
+        this.swayRange = Math.random() * 20 + 10;
+        this.swayOffset = Math.random() * 100;
+        this.popped = false;
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += Math.sin(this.y * this.swaySpeed + this.swayOffset) * 0.5;
+        if (this.y < -this.radius * 2) {
+          this.reset();
+        }
+      }
+      draw() {
+        if (this.popped) return;
+        ctx.save();
+        // Draw String
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y + this.radius);
+        ctx.bezierCurveTo(
+          this.x - 5, this.y + this.radius + 15,
+          this.x + 5, this.y + this.radius + 25,
+          this.x, this.y + this.radius + 40
+        );
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Draw Balloon Body
+        ctx.beginPath();
+        ctx.ellipse(this.x, this.y, this.radius * 0.85, this.radius, 0, 0, 2 * Math.PI);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+
+        // Bottom knot
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y + this.radius);
+        ctx.lineTo(this.x - 5, this.y + this.radius + 8);
+        ctx.lineTo(this.x + 5, this.y + this.radius + 8);
+        ctx.closePath();
+        ctx.fillStyle = this.color;
+        ctx.fill();
+
+        // Highlight shine
+        ctx.beginPath();
+        ctx.ellipse(this.x - this.radius * 0.3, this.y - this.radius * 0.4, this.radius * 0.15, this.radius * 0.25, Math.PI / 4, 0, 2 * Math.PI);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.fill();
+
+        ctx.restore();
+      }
+    }
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function loopCelebration() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      balloons.forEach(b => {
+        b.update();
+        b.draw();
+      });
+
+      animationFrameId = requestAnimationFrame(loopCelebration);
+    }
+
+    function triggerCelebration() {
+      canvas.style.display = 'block';
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      // Create confetti
+      particles = [];
+      for (let i = 0; i < 120; i++) {
+        particles.push(new ConfettiParticle());
+      }
+
+      // Create balloons
+      balloons = [];
+      for (let i = 0; i < 12; i++) {
+        balloons.push(new Balloon());
+      }
+
+      loopCelebration();
+
+      // Listen for click pops on balloons!
+      window.addEventListener('click', popBalloonCheck);
+    }
+
+    function popBalloonCheck(e) {
+      const clickX = e.clientX;
+      const clickY = e.clientY;
+      balloons.forEach(b => {
+        if (!b.popped) {
+          const dist = Math.hypot(clickX - b.x, clickY - b.y);
+          if (dist < b.radius) {
+            b.popped = true;
+            playPopSound();
+            createPopExplosion(b.x, b.y, b.color);
+          }
+        }
+      });
+    }
+
+    function createPopExplosion(x, y, color) {
+      // Temporary burst of particles at the pop point
+      for (let i = 0; i < 15; i++) {
+        let p = new ConfettiParticle();
+        p.x = x;
+        p.y = y;
+        p.speedX = Math.random() * 8 - 4;
+        p.speedY = Math.random() * 8 - 4;
+        p.size = Math.random() * 5 + 3;
+        p.color = color;
+        particles.push(p);
+      }
+    }
+
+    function stopCelebration() {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      canvas.style.display = 'none';
+      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('click', popBalloonCheck);
+    }
+
+
+    // --- OFFLINE AUDIO SYNTHESIZER (WEB AUDIO API) ---
+    // Generates a soft, motivational chord progression using ambient synth pads
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    // Play a gentle balloon pop sound completely offline
+    function playPopSound() {
+      if (!audioCtx) return;
+      
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.1);
+      
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.1);
+      
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.1);
+    }
+
+    // Ambient chords progression:
+    // Cmaj9 -> Am9 -> Fmaj9 -> G11
+    const chordsFreqs = [
+      [130.81, 164.81, 196.00, 246.94], // C3, E3, G3, B3
+      [110.00, 130.81, 164.81, 196.00], // A2, C3, E3, G3
+      [87.31, 110.00, 130.81, 164.81],  // F2, A2, C3, E3
+      [98.00, 123.47, 146.83, 174.61]   // G2, B2, D3, F3
+    ];
+    let currentChordIdx = 0;
+
+    function playChordCycle() {
+      if (!isMusicPlaying) return;
+
+      const freqs = chordsFreqs[currentChordIdx];
+      const duration = 6; // 6 seconds per chord
+      const now = audioCtx.currentTime;
+
+      // Play 4 voices for a rich chord sound
+      freqs.forEach(freq => {
+        const osc = audioCtx.createOscillator();
+        const filter = audioCtx.createBiquadFilter();
+        const gainNode = audioCtx.createGain();
+
+        osc.type = 'triangle'; // triangle waves sound softer
+        osc.frequency.value = freq;
+
+        // Soft Lowpass Filter for warmth
+        filter.type = 'lowpass';
+        filter.frequency.value = 600;
+
+        // Slow Attack, decay, and release curve
+        gainNode.gain.setValueAtTime(0, now);
+        gainNode.gain.linearRampToValueAtTime(0.04, now + 2.5); // Attack
+        gainNode.gain.setValueAtTime(0.04, now + 3.5);
+        gainNode.gain.linearRampToValueAtTime(0, now + duration); // Release
+
+        osc.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        osc.start(now);
+        osc.stop(now + duration);
+
+        musicNodes.push(osc);
+      });
+
+      // Move to next chord in cycle
+      currentChordIdx = (currentChordIdx + 1) % chordsFreqs.length;
+
+      // Schedule next chord repeat
+      musicTimeout = setTimeout(playChordCycle, (duration - 0.5) * 1000);
+    }
+
+    function toggleMusic() {
+      initAudio();
+      const mBtn = document.getElementById('music-btn');
+
+      if (!isMusicPlaying) {
+        // Turn ON
+        isMusicPlaying = true;
+        mBtn.textContent = '🔊 ON';
+        mBtn.style.backgroundColor = 'var(--success-color)';
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        currentChordIdx = 0;
+        playChordCycle();
+      } else {
+        // Turn OFF
+        isMusicPlaying = false;
+        mBtn.textContent = '🔇 OFF';
+        mBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+        
+        // Stop currently playing chord nodes
+        musicNodes.forEach(node => {
+          try { node.stop(); } catch(e) {}
+        });
+        musicNodes = [];
+        if (musicTimeout) clearTimeout(musicTimeout);
+      }
+    }
+  </script>
+</body>
+</html>
